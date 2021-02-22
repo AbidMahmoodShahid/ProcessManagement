@@ -1,4 +1,5 @@
 ﻿using inotech.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace Process.Simulation.Elements
 {
@@ -14,6 +15,10 @@ namespace Process.Simulation.Elements
         }
         public SimulationModel()
         { }
+
+        //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
+        [Key]
+        public int SimulationModelId { get; set; }
 
         public string ProcessPointId { get; private set; }
 

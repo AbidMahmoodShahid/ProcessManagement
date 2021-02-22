@@ -163,6 +163,10 @@
     <Compile Include="Migrations\20210202140238_ProcessManagementDBInitial.designer.cs">
       <DependentUpon>20210202140238_ProcessManagementDBInitial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210222131922_SimulationPointsAdded.cs" />
+    <Compile Include="Migrations\20210222131922_SimulationPointsAdded.designer.cs">
+      <DependentUpon>20210222131922_SimulationPointsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -175,6 +179,10 @@
     <ProjectReference Include="..\Process.Editor.Elements\Process.Editor.Elements.csproj">
       <Project>{6fde3599-5f58-4fed-9bf6-a8d21a15dd70}</Project>
       <Name>Process.Editor.Elements</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Process.Simulation.Elements\Process.Simulation.Elements.csproj">
+      <Project>{c8b288d2-f44e-427d-8743-e6f62537d28b}</Project>
+      <Name>Process.Simulation.Elements</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

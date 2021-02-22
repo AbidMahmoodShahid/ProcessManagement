@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Process.Editor.Elements;
+using Process.Simulation.Elements;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,7 @@ namespace ProcessManagement.DataStorage.EF
         public DbSet<ProcessPointB> ProcessPointB { get; set; }
         public DbSet<ProcessPointC> ProcessPointC { get; set; }
         public DbSet<ProcessPointD> ProcessPointD { get; set; }
+        public DbSet<SimulationModel> SimulationModel { get; set; }
 
 
         public PMDataContext()
