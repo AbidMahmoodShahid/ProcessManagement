@@ -1,0 +1,75 @@
+﻿<Window
+    x:Class="ProcessManagement.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:ProcessManagement"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:peUI="clr-namespace:Process.Editor.UI;assembly=Process.Editor.UI"
+    xmlns:psUI="clr-namespace:Process.Simulation.UI;assembly=Process.Simulation.UI"
+    Title="ProcessManagement"
+    Width="1000"
+    Height="600"
+    mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding Path=ApplicationClosedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Border BorderBrush="Black" BorderThickness="0,1,0,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.ColumnSpan="3">
+                <StackPanel Orientation="Horizontal">
+                    <peUI:ToolBarUC Margin="0" DataContext="{Binding ProcessEditorViewModel}" />
+                    <ToolBarTray>
+                        <ToolBar>
+                            <Button
+                                Width="100"
+                                Command="{Binding SwitchModeCommand}"
+                                Content="{Binding SwitchModeButtonContent}" />
+                        </ToolBar>
+                    </ToolBarTray>
+                </StackPanel>
+            </Grid>
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                BorderBrush="Black"
+                BorderThickness="0,0,0,0">
+                <peUI:ProcessUC Margin="0" DataContext="{Binding ProcessEditorViewModel}" />
+            </Border>
+
+            <peUI:ProcessEditorUC
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10"
+                BorderBrush="Black"
+                BorderThickness="1"
+                DataContext="{Binding ProcessEditorViewModel}"
+                Visibility="{Binding EditorUCVisibility}" />
+
+            <psUI:ProcessSimulationUC
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10"
+                BorderBrush="Black"
+                BorderThickness="1"
+                DataContext="{Binding CurrentSimulationViewModel}"
+                Visibility="{Binding SimulationUCVisibility}" />
+
+        </Grid>
+    </Border>
+
+</Window>

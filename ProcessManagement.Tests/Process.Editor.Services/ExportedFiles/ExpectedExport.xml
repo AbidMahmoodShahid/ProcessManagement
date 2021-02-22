@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProcessModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>ExportedProcess</Name>
+  <Id>EP_01</Id>
+  <SortingNumber>0</SortingNumber>
+  <ItemCollection />
+</ProcessModel>

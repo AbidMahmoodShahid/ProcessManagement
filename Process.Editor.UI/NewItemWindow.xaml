@@ -1,0 +1,82 @@
+﻿<Window
+    x:Class="Process.Editor.UI.NewItemWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Process.Styling.Controls;assembly=Process.Styling"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Process.Editor.UI"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="NewItem_Window"
+    Title="NewItem"
+    Width="500"
+    Height="260"
+    MinWidth="500"
+    MinHeight="260"
+    mc:Ignorable="d">
+
+    <Border BorderBrush="Black" BorderThickness="0,1,0,0">
+        <Grid x:Name="Grid_DialogBox">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <controls:InoPanel
+                Margin="10"
+                Columns="2"
+                ElementMargin="5">
+                <Label>Name:</Label>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                <Label>ID:</Label>
+                <TextBox Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Visibility="{Binding SortingVisibility}">Sorting Number:</Label>
+                <TextBox Text="{Binding SortingNumber, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding SortingVisibility}" />
+                <Label Visibility="{Binding ItemTypeVisibility}">Processpoint Type:</Label>
+                <ComboBox
+                    ItemsSource="{Binding ProcessPointTypeNameList}"
+                    SelectedItem="{Binding ProcessPointTypeName}"
+                    Visibility="{Binding ItemTypeVisibility}" />
+            </controls:InoPanel>
+
+            <Border
+                Grid.Row="1"
+                MaxHeight="60"
+                VerticalAlignment="Bottom"
+                Background="WhiteSmoke">
+
+                <!--  grid with buttons  -->
+                <Grid
+                    x:Name="Grid_Buttons"
+                    MaxHeight="60"
+                    Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="1"
+                        Width="100"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Command="{Binding OkCommand, Mode=OneWay}"
+                        CommandParameter="{Binding ElementName=NewItem_Window}"
+                        Content="Ok"
+                        IsDefault="True" />
+                    <Button
+                        Grid.Column="2"
+                        Width="100"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Content="Cancel"
+                        IsCancel="True" />
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+    </Border>
+
+</Window>
