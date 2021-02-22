@@ -26,8 +26,6 @@ namespace Process.Editor.Elements
         ////Collection Navigation Property(OneToMany)
         //public IList<ProcessGroupModel> ProcessGroupProcess { get; set; }
 
-
-
         public ProcessModel(string processname, string processId, int sortingNumber)
         {
             Name = processname;

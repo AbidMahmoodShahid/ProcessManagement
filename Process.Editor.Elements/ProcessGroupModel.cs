@@ -26,8 +26,6 @@ namespace Process.Editor.Elements
             set { SetField(ref _sortingNumber, value); }
         }
 
-
-
         //Collection Navigation Property(OneToMany)
         public ObservableCollection<ProcessPoint> ItemCollection { get; set; }
 

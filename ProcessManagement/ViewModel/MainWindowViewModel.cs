@@ -33,22 +33,11 @@ namespace ProcessManagement.ViewModel
             pMDC.Test();
             pMDC.SaveChanges();
 
-            var ListOfStudents = pMDC.Process.Where(p => p.Name == GetName()).ToList();
-
             #endregion
 
             ServiceLocator.Default.RegisterService<ICreateNewItem, CreateNewItem>(RegisterOption.Transient);
             ServiceLocator.Default.RegisterService<ISetItemInformation, SetItemInformation>(RegisterOption.Transient);
         }
-
-        #region delete after databse setup correctly
-
-        public string GetName()
-        {
-            return "Gates";
-        }
-
-        #endregion
 
         #region Properties
 
@@ -110,7 +99,7 @@ namespace ProcessManagement.ViewModel
                 CurrentSimulationViewModel.SimulationUCVisibility = Visibility.Visible;
                 IsSimulationMode = true;
                 SwitchModeButtonContent = "Editor Mode";
-                Services.SimulationUpdateServices.SetSimulationViewModelDictionary(this);
+                Services.SimulationUpdateServices.UpdateSimulationViewModelDictionary(this);
             }
         }
 

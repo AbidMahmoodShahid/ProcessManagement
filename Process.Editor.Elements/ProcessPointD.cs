@@ -8,7 +8,6 @@
             Id = processPointId;
             Name = processPointName;
             SortingNumber = sortingNumber;
-            SimulationStatus = "Unprocessed";
         }
 
         public ProcessPointD()

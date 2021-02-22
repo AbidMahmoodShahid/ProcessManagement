@@ -7,7 +7,7 @@ namespace ProcessManagement.Services
 {
     public static class SimulationUpdateServices
     {
-        public static void SetSimulationViewModelDictionary(ISimulationManager simulationManager)
+        public static void UpdateSimulationViewModelDictionary(ISimulationManager simulationManager)
         {
             simulationManager.SimulationViewModelDictionary = new Dictionary<string, SimulationViewModel>();
             foreach(ProcessModel processModel in simulationManager.ProcessEditorViewModel.ItemCollection)

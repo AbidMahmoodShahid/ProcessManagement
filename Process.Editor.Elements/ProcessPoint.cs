@@ -31,13 +31,6 @@ namespace Process.Editor.Elements
         // Foriegn Key Property
         public int ProcessGroupModelId { get; set; }
 
-
-
-
-
-        [NotMapped]
-        public string SimulationStatus { get; set; }
-
         #endregion
 
         #region copy
