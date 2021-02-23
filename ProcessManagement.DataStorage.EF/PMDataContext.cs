@@ -29,7 +29,7 @@ namespace ProcessManagement.DataStorage.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=CB-AM\INO2016;Database=ProcessManagementDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=ABIDMAHMOOD\AMSQLSERVER;Database=ProcessManagementDB;Trusted_Connection=True;");
         }
 
 
