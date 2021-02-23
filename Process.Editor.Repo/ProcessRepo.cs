@@ -23,7 +23,7 @@ namespace Process.Editor.Repo
 
         public void AddProcess(ProcessModel processModel)
         {
-            _pMDataContext.Process.Attach(processModel);
+            _pMDataContext.Process.Attach(processModel);//TODO AM: see difference between add and attatch
         }
 
         public void DeleteProcess(ProcessModel processModel)
