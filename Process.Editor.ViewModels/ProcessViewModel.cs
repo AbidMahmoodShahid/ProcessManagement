@@ -79,9 +79,6 @@ namespace Process.Editor.ViewModels
 
             AddItemService addItemService = new AddItemService();
             addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
-
-            IProcessRepo processRepo = new ProcessRepo();
-            processRepo.AddProcess((ProcessModel)newProcess);
         }
 
         #endregion

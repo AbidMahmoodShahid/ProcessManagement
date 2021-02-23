@@ -40,7 +40,7 @@ namespace Process.Editor.ViewModels
             _unitOfWork = new UnitOfWork.UnitOfWork();
 
             if(includeMockData)
-                LoadProcessModels();//MockDataService.CreateMockData(ItemCollection);
+                LoadProcessModels();
         }
 
         private void LoadProcessModels()

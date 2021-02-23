@@ -25,14 +25,6 @@ namespace ProcessManagement.ViewModel
             SimulationViewModelDictionary = new Dictionary<string, SimulationViewModel>();
             IsSimulationMode = false;
 
-            #region  delete after databse setup correctly TODO AM: remove
-
-            //PMDataContext pMDC = new PMDataContext();
-            //pMDC.Test();
-            //pMDC.SaveChanges();
-
-            #endregion
-
             ServiceLocator.Default.RegisterService<ICreateNewItem, CreateNewItem>(RegisterOption.Transient);
             ServiceLocator.Default.RegisterService<ISetItemInformation, SetItemInformation>(RegisterOption.Transient);
         }
