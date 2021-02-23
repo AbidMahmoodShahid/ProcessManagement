@@ -90,6 +90,10 @@
       <Project>{6fde3599-5f58-4fed-9bf6-a8d21a15dd70}</Project>
       <Name>Process.Editor.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Process.Editor.Repo\Process.Editor.Repo.csproj">
+      <Project>{51e55a09-3219-4180-98a4-014262e01b32}</Project>
+      <Name>Process.Editor.Repo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Process.Editor.Services\Process.Editor.Services.csproj">
       <Project>{418bd98f-550c-4a68-af3f-48146eddb16d}</Project>
       <Name>Process.Editor.Services</Name>

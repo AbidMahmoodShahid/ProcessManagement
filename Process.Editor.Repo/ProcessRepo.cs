@@ -3,13 +3,13 @@ using ProcessManagement.DataStorage.EF;
 
 namespace Process.Editor.Repo
 {
-    public class Process
+    public class ProcessRepo
     {
-        PMDataContext _pMDataContext = new PMDataContext();
+        private PMDataContext _pMDataContext;
 
-        public Process()
+        public ProcessRepo()
         {
-            PMDataContext pMDataContext = new PMDataContext();
+            _pMDataContext = new PMDataContext();
         }
 
         public void LoadProcess()
@@ -20,11 +20,18 @@ namespace Process.Editor.Repo
         public void AddProcess(ProcessModel processModel)
         {
             _pMDataContext.Process.Add(processModel);
+            _pMDataContext.SaveChanges();
+        }
+
+        public void UpdateProcess()
+        {
+            _pMDataContext.SaveChanges();
         }
 
         public void RemoveProcess(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);
+            _pMDataContext.SaveChanges();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using inotech.Core;
 using Microsoft.Win32;
 using Process.Editor.Elements;
+using Process.Editor.Repo;
 using Process.Editor.Services;
 using ProcessManagement.Core;
 using System;
@@ -78,6 +79,9 @@ namespace Process.Editor.ViewModels
 
             AddItemService addItemService = new AddItemService();
             addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
+
+            ProcessRepo processRepo = new ProcessRepo();
+            processRepo.AddProcess((ProcessModel)newProcess);
         }
 
         #endregion
