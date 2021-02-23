@@ -4,10 +4,8 @@ using Process.Editor.UI;
 using Process.Editor.ViewModels;
 using Process.Simulation.ViewModels;
 using ProcessManagement.Core;
-using ProcessManagement.DataStorage.EF;
 using ProcessManagement.Elements;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 
 namespace ProcessManagement.ViewModel
@@ -27,11 +25,11 @@ namespace ProcessManagement.ViewModel
             SimulationViewModelDictionary = new Dictionary<string, SimulationViewModel>();
             IsSimulationMode = false;
 
-            #region  delete after databse setup correctly
+            #region  delete after databse setup correctly TODO AM: remove
 
-            PMDataContext pMDC = new PMDataContext();
-            pMDC.Test();
-            pMDC.SaveChanges();
+            //PMDataContext pMDC = new PMDataContext();
+            //pMDC.Test();
+            //pMDC.SaveChanges();
 
             #endregion
 

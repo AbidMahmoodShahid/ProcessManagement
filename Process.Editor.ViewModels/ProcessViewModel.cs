@@ -80,7 +80,7 @@ namespace Process.Editor.ViewModels
             AddItemService addItemService = new AddItemService();
             addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
 
-            ProcessRepo processRepo = new ProcessRepo();
+            IProcessRepo processRepo = new ProcessRepo();
             processRepo.AddProcess((ProcessModel)newProcess);
         }
 

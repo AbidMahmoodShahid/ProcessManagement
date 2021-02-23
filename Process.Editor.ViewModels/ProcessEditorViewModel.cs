@@ -9,6 +9,7 @@ namespace Process.Editor.ViewModels
 {
     public partial class ProcessEditorViewModel : PropertyChangedNotifier
     {
+        private UnitOfWork.UnitOfWork _unitOfWork;
         public ProcessEditorViewModel(bool includeMockData)
         {
             //DelegateCommands
@@ -35,8 +36,16 @@ namespace Process.Editor.ViewModels
             _processPointTypeList = _getterService.GetInheritedClassesArray(typeof(ProcessPoint));
             _pointTypeNameList = _getterService.GetProcessPointTypeNameList(_processPointTypeList);
 
+
+            _unitOfWork = new UnitOfWork.UnitOfWork();
+
             if(includeMockData)
-                MockDataService.CreateMockData(ItemCollection);
+                LoadProcessModels();//MockDataService.CreateMockData(ItemCollection);
+        }
+
+        private void LoadProcessModels()
+        {
+            ItemCollection = new ObservableCollection<ProcessModel>(_unitOfWork.LoadAll());
         }
 
         private GetterService _getterService;
