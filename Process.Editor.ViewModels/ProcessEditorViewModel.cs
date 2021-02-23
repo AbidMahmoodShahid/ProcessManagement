@@ -26,6 +26,9 @@ namespace Process.Editor.ViewModels
             ExportProcessCommand = new DelegateCommand(ExecuteExportProcess, CanExecuteExportProcess);
             ImportProcessCommand = new DelegateCommand(ExecuteImportProcess);
 
+            //DB
+            SaveSelectedProcessCommand = new DelegateCommand(ExecuteSaveSelectedProcess);
+
             ItemCollection = new ObservableCollection<ProcessModel>();
             SortingNumberVisibility = Visibility.Hidden;
             EditorUCVisibility = Visibility.Visible;

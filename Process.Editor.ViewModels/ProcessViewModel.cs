@@ -213,5 +213,20 @@ namespace Process.Editor.ViewModels
 
         #endregion
 
+        #region Add process Command
+
+        public DelegateCommand SaveSelectedProcessCommand { get; }
+
+        private void ExecuteSaveSelectedProcess(object obj)
+        {
+            if(SelectedProcess == null)
+                return;
+
+            _unitOfWork.AddProcess(SelectedProcess);
+
+        }
+
+        #endregion
+
     }
 }
