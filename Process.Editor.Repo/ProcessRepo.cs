@@ -27,11 +27,6 @@ namespace Process.Editor.Repo
             _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attach
         }
 
-        public void UpdateProcess(ProcessModel processModel)
-        {
-
-        }
-
         public void DeleteProcess(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);

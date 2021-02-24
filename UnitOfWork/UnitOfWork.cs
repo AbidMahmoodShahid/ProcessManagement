@@ -26,11 +26,6 @@ namespace UnitOfWork
             _processRepo.AttachProcess(processModel);
         }
 
-        public void UpdateProcess(ProcessModel processModel)
-        {
-            _processRepo.UpdateProcess(processModel);
-        }
-
         public void DeleteProcess(ProcessModel processModel)
         {
             _processRepo.DeleteProcess(processModel);
