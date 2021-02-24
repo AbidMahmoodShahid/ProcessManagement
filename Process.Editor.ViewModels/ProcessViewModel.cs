@@ -190,7 +190,7 @@ namespace Process.Editor.ViewModels
 
             AddItemService addItemService = new AddItemService();
             addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
-            _unitOfWork.AddProcess((ProcessModel)newProcess);
+            _unitOfWork.AttachProcess((ProcessModel)newProcess);
         }
 
         #endregion
@@ -222,7 +222,7 @@ namespace Process.Editor.ViewModels
 
         private void ExecuteSave(object obj)
         {
-            _unitOfWork.SaveToDatabase();
+            _unitOfWork.SaveChanges();
         }
 
         #endregion

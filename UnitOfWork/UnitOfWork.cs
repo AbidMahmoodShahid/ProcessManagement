@@ -21,9 +21,14 @@ namespace UnitOfWork
             return _processRepo.GetAll();
         }
 
-        public void AddProcess(ProcessModel processModel)
+        public void AttachProcess(ProcessModel processModel)
         {
-            _processRepo.AddProcess(processModel);
+            _processRepo.AttachProcess(processModel);
+        }
+
+        public void UpdateProcess(ProcessModel processModel)
+        {
+            _processRepo.UpdateProcess(processModel);
         }
 
         public void DeleteProcess(ProcessModel processModel)
@@ -31,9 +36,9 @@ namespace UnitOfWork
             _processRepo.DeleteProcess(processModel);
         }
 
-        public void SaveToDatabase()
+        public void SaveChanges()
         {
-            _processRepo.SaveToDatabase();
+            _processRepo.SaveChanges();
         }
 
     }

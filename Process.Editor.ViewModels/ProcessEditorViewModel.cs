@@ -10,6 +10,7 @@ namespace Process.Editor.ViewModels
     public partial class ProcessEditorViewModel : PropertyChangedNotifier
     {
         private UnitOfWork.UnitOfWork _unitOfWork;
+
         public ProcessEditorViewModel(bool includeMockData)
         {
             //DelegateCommands

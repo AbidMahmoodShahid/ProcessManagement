@@ -10,10 +10,12 @@ namespace Process.Editor.Repo
     {
         List<ProcessModel> GetAll();
 
-        void AddProcess(ProcessModel processModel);
+        void AttachProcess(ProcessModel processModel);
+
+        void UpdateProcess(ProcessModel processModel);
 
         void DeleteProcess(ProcessModel processModel);
 
-        void SaveToDatabase();
+        void SaveChanges();
     }
 }

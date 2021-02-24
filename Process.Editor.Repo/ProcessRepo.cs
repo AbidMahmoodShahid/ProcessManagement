@@ -22,9 +22,14 @@ namespace Process.Editor.Repo
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList(); //TODO AM: ThenInclude not working
         }
 
-        public void AddProcess(ProcessModel processModel)
+        public void AttachProcess(ProcessModel processModel)
         {
-            _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attatch
+            _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attach
+        }
+
+        public void UpdateProcess(ProcessModel processModel)
+        {
+
         }
 
         public void DeleteProcess(ProcessModel processModel)
@@ -32,7 +37,7 @@ namespace Process.Editor.Repo
             _pMDataContext.Process.Remove(processModel);
         }
 
-        public void SaveToDatabase()
+        public void SaveChanges()
         {
             _pMDataContext.SaveChanges();
         }
