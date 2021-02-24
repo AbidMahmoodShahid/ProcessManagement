@@ -13,7 +13,5 @@ namespace Process.Editor.Repo
         void AttachProcess(ProcessModel processModel);
 
         void DeleteProcess(ProcessModel processModel);
-
-        void SaveChanges();
     }
 }

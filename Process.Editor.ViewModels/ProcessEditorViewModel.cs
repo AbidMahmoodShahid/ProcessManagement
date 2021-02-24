@@ -4,12 +4,12 @@ using Process.Editor.Services;
 using ProcessManagement.Core;
 using System.Collections.ObjectModel;
 using System.Windows;
+using DataAccess;
 
 namespace Process.Editor.ViewModels
 {
     public partial class ProcessEditorViewModel : PropertyChangedNotifier
     {
-        private UnitOfWork.UnitOfWork _unitOfWork;
 
         public ProcessEditorViewModel(bool includeMockData)
         {
@@ -26,7 +26,6 @@ namespace Process.Editor.ViewModels
             DeleteProcessPointCommand = new DelegateCommand(ExecuteDeleteProcessPoint, CanExecuteDeleteProcessPoint);
             ExportProcessCommand = new DelegateCommand(ExecuteExportProcess, CanExecuteExportProcess);
             ImportProcessCommand = new DelegateCommand(ExecuteImportProcess);
-            SaveCommand = new DelegateCommand(ExecuteSave);
 
             ItemCollection = new ObservableCollection<ProcessModel>();
             SortingNumberVisibility = Visibility.Hidden;
@@ -38,16 +37,16 @@ namespace Process.Editor.ViewModels
             _processPointTypeList = _getterService.GetInheritedClassesArray(typeof(ProcessPoint));
             _pointTypeNameList = _getterService.GetProcessPointTypeNameList(_processPointTypeList);
 
-
-            _unitOfWork = new UnitOfWork.UnitOfWork();
-
             if(includeMockData)
                 LoadAll();
         }
 
         private void LoadAll()
         {
-            ItemCollection = new ObservableCollection<ProcessModel>(_unitOfWork.GetAll());
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                ItemCollection = new ObservableCollection<ProcessModel>(uow.ProcessRepo.GetAll());
+            }
         }
 
         private GetterService _getterService;

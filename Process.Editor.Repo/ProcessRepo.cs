@@ -12,14 +12,16 @@ namespace Process.Editor.Repo
     {
         private PMDataContext _pMDataContext;
 
-        public ProcessRepo()
+        public ProcessRepo(PMDataContext pMDataContext)
         {
-            _pMDataContext = new PMDataContext();
+            _pMDataContext = pMDataContext;
         }
 
         public List<ProcessModel> GetAll()
         {
-            return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList(); //TODO AM: ThenInclude not working
+            //return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList(); //TODO AM: ThenInclude not working
+            var x = _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
+            return x;
         }
 
         public void AttachProcess(ProcessModel processModel)
@@ -30,11 +32,6 @@ namespace Process.Editor.Repo
         public void DeleteProcess(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);
-        }
-
-        public void SaveChanges()
-        {
-            _pMDataContext.SaveChanges();
         }
     }
 }

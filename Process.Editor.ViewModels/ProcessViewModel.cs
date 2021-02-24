@@ -1,4 +1,5 @@
-﻿using inotech.Core;
+﻿using DataAccess;
+using inotech.Core;
 using Microsoft.Win32;
 using Process.Editor.Elements;
 using Process.Editor.Repo;
@@ -190,7 +191,12 @@ namespace Process.Editor.ViewModels
 
             AddItemService addItemService = new AddItemService();
             addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
-            _unitOfWork.AttachProcess((ProcessModel)newProcess);
+
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.ProcessRepo.AttachProcess((ProcessModel)newProcess);
+                uow.SaveChanges();
+            }
         }
 
         #endregion
@@ -209,20 +215,15 @@ namespace Process.Editor.ViewModels
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process?", "Delete Process", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
-                _unitOfWork.DeleteProcess(SelectedProcess);
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    uow.ProcessRepo.DeleteProcess(SelectedProcess);
+                    uow.SaveChanges();
+                }
+
                 ItemCollection.Remove(SelectedProcess);
+
             }
-        }
-
-        #endregion
-
-        #region Save process Command
-
-        public DelegateCommand SaveCommand { get; }
-
-        private void ExecuteSave(object obj)
-        {
-            _unitOfWork.SaveChanges();
         }
 
         #endregion

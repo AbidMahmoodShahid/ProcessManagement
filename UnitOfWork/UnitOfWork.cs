@@ -1,40 +1,53 @@
-﻿using Process.Editor.Elements;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using Process.Editor.Elements;
 using Process.Editor.Repo;
 using ProcessManagement.DataStorage.EF;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Transactions;
 
-namespace UnitOfWork
+namespace DataAccess
 {
-    public class UnitOfWork
+    public class UnitOfWork : IDisposable
     {
-        private IProcessRepo _processRepo;
+        private PMDataContext _pMDataContext;
+        private IDbContextTransaction _transaction;
+        //private Task<IDbContextTransaction> transaction;
 
         public UnitOfWork()
         {
-            _processRepo = new ProcessRepo();
+            _pMDataContext = new PMDataContext();
+            _transaction = _pMDataContext.Database.BeginTransaction(); //TODO Am: read why we should use this
+
+            //transaction = _pMDataContext.Database.BeginTransactionAsync(); //TODO Am: read why we should use this
         }
 
-
-        public List<ProcessModel> GetAll()
+        // Repos
+        private IProcessRepo _processRepo;
+        public IProcessRepo ProcessRepo
         {
-            return _processRepo.GetAll();
-        }
+            get
+            {
+                if(_processRepo == null)
+                    _processRepo = new ProcessRepo(_pMDataContext);
 
-        public void AttachProcess(ProcessModel processModel)
-        {
-            _processRepo.AttachProcess(processModel);
-        }
-
-        public void DeleteProcess(ProcessModel processModel)
-        {
-            _processRepo.DeleteProcess(processModel);
+                return _processRepo;
+            }
         }
 
         public void SaveChanges()
         {
-            _processRepo.SaveChanges();
+            _pMDataContext.SaveChanges();
+            //transaction.Result.Commit();
+            _transaction.Commit();
         }
 
+
+        public void Dispose()
+        {
+            _pMDataContext.Dispose();
+        }
     }
 }
