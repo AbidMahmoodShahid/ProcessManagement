@@ -209,8 +209,8 @@ namespace Process.Editor.ViewModels
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process?", "Delete Process", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
-                ItemCollection.Remove(SelectedProcess);
                 _unitOfWork.DeleteProcess(SelectedProcess);
+                ItemCollection.Remove(SelectedProcess);
             }
         }
 
