@@ -63,26 +63,6 @@ namespace Process.Editor.ViewModels
         public Visibility SortingNumberVisibility { get; private set; }
 
 
-        #region Add process Command
-
-        public DelegateCommand AddProcessCommand { get; }
-
-        private void ExecuteAddProcess(object obj)
-        {
-            if(ItemCollection == null)
-                return;
-
-            ISortableItem newProcess = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcess(_getterService.GetIDList(ItemCollection));
-
-            if(newProcess == null)
-                return;
-
-            AddItemService addItemService = new AddItemService();
-            addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
-        }
-
-        #endregion
-
         #region Import process
 
         public DelegateCommand ImportProcessCommand { get; }
@@ -193,6 +173,28 @@ namespace Process.Editor.ViewModels
 
         #endregion
 
+
+        #region Add process Command
+
+        public DelegateCommand AddProcessCommand { get; }
+
+        private void ExecuteAddProcess(object obj)
+        {
+            if(ItemCollection == null)
+                return;
+
+            ISortableItem newProcess = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcess(_getterService.GetIDList(ItemCollection));
+
+            if(newProcess == null)
+                return;
+
+            AddItemService addItemService = new AddItemService();
+            addItemService.AddService(ItemCollection, (ProcessModel)newProcess);
+            _unitOfWork.AddProcess((ProcessModel)newProcess);
+        }
+
+        #endregion
+
         #region delete process Command
 
         public DelegateCommand DeleteProcessCommand { get; private set; }
@@ -204,26 +206,23 @@ namespace Process.Editor.ViewModels
 
         private void ExecuteDeleteProcess(object obj)
         {
-            MessageBoxResult result = new MessageBoxResult();
-
-            result = MessageBox.Show("Are you sure you want to delete the process?", "Delete Process", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process?", "Delete Process", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
+            {
                 ItemCollection.Remove(SelectedProcess);
+                _unitOfWork.DeleteProcess(SelectedProcess);
+            }
         }
 
         #endregion
 
-        #region Add process Command
+        #region Save process Command
 
-        public DelegateCommand SaveSelectedProcessCommand { get; }
+        public DelegateCommand SaveCommand { get; }
 
-        private void ExecuteSaveSelectedProcess(object obj)
+        private void ExecuteSave(object obj)
         {
-            if(SelectedProcess == null)
-                return;
-
-            _unitOfWork.AddProcess(SelectedProcess);
-
+            _unitOfWork.SaveToDatabase();
         }
 
         #endregion

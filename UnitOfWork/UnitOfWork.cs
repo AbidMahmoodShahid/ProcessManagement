@@ -16,7 +16,7 @@ namespace UnitOfWork
         }
 
 
-        public List<ProcessModel> LoadAll()
+        public List<ProcessModel> GetAll()
         {
             return _processRepo.GetAll();
         }
@@ -24,24 +24,17 @@ namespace UnitOfWork
         public void AddProcess(ProcessModel processModel)
         {
             _processRepo.AddProcess(processModel);
-            UpdateProcessRepository();
         }
 
         public void DeleteProcess(ProcessModel processModel)
         {
             _processRepo.DeleteProcess(processModel);
-            UpdateProcessRepository();
         }
 
-
-        #region Private methods
-
-        private void UpdateProcessRepository()
+        public void SaveToDatabase()
         {
-            _processRepo.Update();
+            _processRepo.SaveToDatabase();
         }
-
-        #endregion
 
     }
 }

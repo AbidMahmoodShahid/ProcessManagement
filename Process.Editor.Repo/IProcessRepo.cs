@@ -14,6 +14,6 @@ namespace Process.Editor.Repo
 
         void DeleteProcess(ProcessModel processModel);
 
-        void Update();
+        void SaveToDatabase();
     }
 }

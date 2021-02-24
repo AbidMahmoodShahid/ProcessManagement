@@ -25,9 +25,7 @@ namespace Process.Editor.ViewModels
             DeleteProcessPointCommand = new DelegateCommand(ExecuteDeleteProcessPoint, CanExecuteDeleteProcessPoint);
             ExportProcessCommand = new DelegateCommand(ExecuteExportProcess, CanExecuteExportProcess);
             ImportProcessCommand = new DelegateCommand(ExecuteImportProcess);
-
-            //DB
-            SaveSelectedProcessCommand = new DelegateCommand(ExecuteSaveSelectedProcess);
+            SaveCommand = new DelegateCommand(ExecuteSave);
 
             ItemCollection = new ObservableCollection<ProcessModel>();
             SortingNumberVisibility = Visibility.Hidden;
@@ -43,12 +41,12 @@ namespace Process.Editor.ViewModels
             _unitOfWork = new UnitOfWork.UnitOfWork();
 
             if(includeMockData)
-                LoadProcessModels();
+                LoadAll();
         }
 
-        private void LoadProcessModels()
+        private void LoadAll()
         {
-            ItemCollection = new ObservableCollection<ProcessModel>(_unitOfWork.LoadAll());
+            ItemCollection = new ObservableCollection<ProcessModel>(_unitOfWork.GetAll());
         }
 
         private GetterService _getterService;

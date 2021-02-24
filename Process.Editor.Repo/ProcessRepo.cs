@@ -1,4 +1,5 @@
-﻿using Process.Editor.Elements;
+﻿using Microsoft.EntityFrameworkCore;
+using Process.Editor.Elements;
 using ProcessManagement.DataStorage.EF;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace Process.Editor.Repo
 
         public List<ProcessModel> GetAll()
         {
-            return _pMDataContext.Process.ToList();
+            return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList(); //TODO AM: ThenInclude not working
         }
 
         public void AddProcess(ProcessModel processModel)
         {
-            _pMDataContext.Process.Attach(processModel);//TODO AM: see difference between add and attatch
+            _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attatch
         }
 
         public void DeleteProcess(ProcessModel processModel)
@@ -31,7 +32,7 @@ namespace Process.Editor.Repo
             _pMDataContext.Process.Remove(processModel);
         }
 
-        public void Update()
+        public void SaveToDatabase()
         {
             _pMDataContext.SaveChanges();
         }

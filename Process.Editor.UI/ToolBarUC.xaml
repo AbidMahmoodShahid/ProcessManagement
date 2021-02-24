@@ -27,6 +27,10 @@
                     Command="{Binding DeleteProcessCommand}"
                     Content="Delete Process"
                     IsEnabled="{Binding IsEditorMode}" />
+                <Button
+                    Command="{Binding SaveCommand}"
+                    Content="Save"
+                    IsEnabled="{Binding IsEditorMode}" />
             </ToolBar>
         </ToolBarTray>
     </Grid>
