@@ -10,11 +10,11 @@ namespace Process.Editor.Repo
     {
         List<ProcessGroupModel> GetAll();
 
-        void Attach(ProcessGroupModel processGroupModel);
+        void AddOrUpdate(ProcessGroupModel processGroupModel);
 
         void Update(ProcessGroupModel processGroupModel);
 
-        void UpdateAll(ObservableCollection<ProcessGroupModel> processGroupModel);
+        void AddOrUpdateRange(ObservableCollection<ProcessGroupModel> processGroupModel);
 
         void Delete(ProcessGroupModel processGroupModel);
     }

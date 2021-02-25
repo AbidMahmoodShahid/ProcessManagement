@@ -31,6 +31,12 @@ namespace Process.Editor.Elements
         public ProcessModel()
         {
             ItemCollection = new ObservableCollection<ProcessGroupModel>();
+            ItemCollection.CollectionChanged += ItemCollection_CollectionChanged;
+        }
+
+        private void ItemCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            string a = "";
         }
 
         [NotMapped]

@@ -17,6 +17,7 @@ namespace Process.Editor.Repo
             _pMDataContext = pMDataContext;
         }
 
+        //TODO AM: implement baseclass
         public List<ProcessModel> GetAll()
         {
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();

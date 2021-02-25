@@ -199,34 +199,29 @@ namespace Process.Editor.ViewModels
         private void ExecuteDeleteProcessGroup(object obj)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process group?", "Delete Processgroup", MessageBoxButton.YesNo);
-            if(result == MessageBoxResult.Yes)
+            if(result != MessageBoxResult.Yes)
+                return;
+
+            //TODO AM: Bug
+            ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
+            SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
+
+            if(SelectedProcess.ItemCollection.Count < 1)
+                return;
+
+            for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
             {
-                // removing selected processfgroup from Database
-                using(UnitOfWork uow = new UnitOfWork())
-                {
-                    uow.ProcessGroupRepo.Delete(SelectedProcessGroup);
-                    uow.SaveChanges();
-                }
-
-                SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
-
-                if(SelectedProcess.ItemCollection.Count < 1)
-                    return;
-
-                int i = 1;
-                foreach(ProcessGroupModel processGroupModel in SelectedProcess.ItemCollection)
-                {
-                    processGroupModel.SortingNumber = i;
-                    i++;
-                }
-
-                // to ensure that when sorting number changes, it is also editted in database
-                using(UnitOfWork uow = new UnitOfWork())
-                {
-                    uow.ProcessGroupRepo.UpdateAll(SelectedProcess.ItemCollection);
-                    uow.SaveChanges();
-                }
+                SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
             }
+
+            // to ensure that when sorting number changes, it is also editted in database
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
+                uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
+                uow.SaveChanges();
+            }
+
         }
 
         #endregion

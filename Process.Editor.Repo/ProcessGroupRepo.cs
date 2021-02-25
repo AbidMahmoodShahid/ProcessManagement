@@ -24,20 +24,22 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessGroup.Include(pP => pP.ItemCollection).ToList();
         }
 
-        public void Attach(ProcessGroupModel processGroupModel)
+        //TODO AM: fix everywhere
+        public void AddOrUpdate(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Attach(processGroupModel);
         }
 
-        public void Update(ProcessGroupModel processGroup)
+        public void AddOrUpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
-            _pMDataContext.Update(processGroup);
+            _pMDataContext.AttachRange(processGroupList);
         }
 
-        public void UpdateAll(ObservableCollection<ProcessGroupModel> processGroupList)
+        public void Update(ProcessGroupModel processGroup)
         {
-            _pMDataContext.UpdateRange(processGroupList);
+            _pMDataContext.Attach(processGroup);
         }
+
 
         public void Delete(ProcessGroupModel processGroupModel)
         {
