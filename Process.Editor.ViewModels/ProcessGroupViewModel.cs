@@ -1,7 +1,9 @@
-﻿using inotech.Core;
+﻿using DataAccess;
+using inotech.Core;
 using Process.Editor.Elements;
 using Process.Editor.Services;
 using ProcessManagement.Core;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Process.Editor.ViewModels
@@ -29,35 +31,6 @@ namespace Process.Editor.ViewModels
                 SetField(ref _copiedProcessGroup, value);
             }
         }
-
-
-        #region Add processgroup command
-
-        public DelegateCommand AddProcessGroupCommand { get; }
-
-        private bool CanExecuteAddProcessGroup(object obj)
-        {
-            return !(SelectedProcess == null);
-        }
-
-        private void ExecuteAddProcessGroup(object obj)
-        {
-            if(SelectedProcess == null)
-                return;
-
-            if(SelectedProcess.ItemCollection == null)
-                return;
-
-            ISortableItem newProcessGroup = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcessGroup(_getterService.GetIDList(SelectedProcess.ItemCollection), SelectedProcess.ItemCollection.Count);
-
-            if(newProcessGroup == null)
-                return;
-
-            AddItemService addItemService = new AddItemService();
-            addItemService.AddService(SelectedProcess.ItemCollection, (ProcessGroupModel)newProcessGroup);
-        }
-
-        #endregion
 
         #region Processgroup down Command
 
@@ -179,6 +152,41 @@ namespace Process.Editor.ViewModels
 
         #endregion
 
+        #region Add processgroup command
+
+        public DelegateCommand AddProcessGroupCommand { get; }
+
+        private bool CanExecuteAddProcessGroup(object obj)
+        {
+            return !(SelectedProcess == null);
+        }
+
+        private void ExecuteAddProcessGroup(object obj)
+        {
+            if(SelectedProcess == null)
+                return;
+
+            if(SelectedProcess.ItemCollection == null)
+                return;
+
+            ISortableItem newProcessGroup = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcessGroup(_getterService.GetIDList(SelectedProcess.ItemCollection), SelectedProcess.ItemCollection.Count);
+
+            if(newProcessGroup == null)
+                return;
+
+            AddItemService addItemService = new AddItemService();
+            addItemService.AddService(SelectedProcess.ItemCollection, (ProcessGroupModel)newProcessGroup);
+
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.ProcessRepo.Update(SelectedProcess);
+                uow.SaveChanges();
+            }
+        }
+
+        #endregion
+
+
         #region delete processgroup Command
 
         public DelegateCommand DeleteProcessGroupCommand { get; private set; }
@@ -190,18 +198,33 @@ namespace Process.Editor.ViewModels
 
         private void ExecuteDeleteProcessGroup(object obj)
         {
-            MessageBoxResult result = new MessageBoxResult();
-
-            result = MessageBox.Show("Are you sure you want to delete the process group?", "Delete Processgroup", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process group?", "Delete Processgroup", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
+                // removing selected processfgroup from Database
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    uow.ProcessGroupRepo.Delete(SelectedProcessGroup);
+                    uow.SaveChanges();
+                }
+
                 SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
+
+                if(SelectedProcess.ItemCollection.Count < 1)
+                    return;
 
                 int i = 1;
                 foreach(ProcessGroupModel processGroupModel in SelectedProcess.ItemCollection)
                 {
                     processGroupModel.SortingNumber = i;
                     i++;
+                }
+
+                // to ensure that when sorting number changes, it is also editted in database
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    uow.ProcessGroupRepo.UpdateAll(SelectedProcess.ItemCollection);
+                    uow.SaveChanges();
                 }
             }
         }

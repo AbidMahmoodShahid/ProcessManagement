@@ -24,7 +24,8 @@ namespace DataAccess
             //transaction = _pMDataContext.Database.BeginTransactionAsync(); //TODO Am: read why we should use this
         }
 
-        // Repos
+        #region Repos
+
         private IProcessRepo _processRepo;
         public IProcessRepo ProcessRepo
         {
@@ -37,13 +38,38 @@ namespace DataAccess
             }
         }
 
+        private IProcessGroupRepo _processGroupRepo;
+        public IProcessGroupRepo ProcessGroupRepo
+        {
+            get
+            {
+                if(_processGroupRepo == null)
+                    _processGroupRepo = new ProcessGroupRepo(_pMDataContext);
+
+                return _processGroupRepo;
+            }
+        }
+
+        private IProcessPointRepo _processPointRepo;
+        public IProcessPointRepo ProcessPointRepo
+        {
+            get
+            {
+                if(_processPointRepo == null)
+                    _processPointRepo = new ProcessPointRepo(_pMDataContext);
+
+                return _processPointRepo;
+            }
+        }
+
+        #endregion
+
         public void SaveChanges()
         {
             _pMDataContext.SaveChanges();
             //transaction.Result.Commit();
             _transaction.Commit();
         }
-
 
         public void Dispose()
         {

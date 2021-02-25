@@ -24,14 +24,19 @@ namespace Process.Editor.Repo
             return x;
         }
 
-        public void AttachProcess(ProcessModel processModel)
+        public void Attach(ProcessModel processModel)
         {
             _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attach
         }
 
-        public void DeleteProcess(ProcessModel processModel)
+        public void Delete(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);
+        }
+
+        public void Update(ProcessModel processModel)
+        {
+            _pMDataContext.Update(processModel);
         }
     }
 }

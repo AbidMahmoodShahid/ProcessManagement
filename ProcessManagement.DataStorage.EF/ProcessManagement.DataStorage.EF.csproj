@@ -167,6 +167,14 @@
     <Compile Include="Migrations\20210222131922_SimulationPointsAdded.designer.cs">
       <DependentUpon>20210222131922_SimulationPointsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210225065823_AbstractBaseClass.cs" />
+    <Compile Include="Migrations\20210225065823_AbstractBaseClass.designer.cs">
+      <DependentUpon>20210225065823_AbstractBaseClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225070248_testAC.cs" />
+    <Compile Include="Migrations\20210225070248_testAC.designer.cs">
+      <DependentUpon>20210225070248_testAC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

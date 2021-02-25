@@ -17,10 +17,14 @@ namespace ProcessManagement.DataStorage.EF
         //entities TODO AM: Check Loading Abstract Class
         public DbSet<ProcessModel> Process { get; set; }
         public DbSet<ProcessGroupModel> ProcessGroup { get; set; }
-        public DbSet<ProcessPointA> ProcessPointA { get; set; }
-        public DbSet<ProcessPointB> ProcessPointB { get; set; }
-        public DbSet<ProcessPointC> ProcessPointC { get; set; }
-        public DbSet<ProcessPointD> ProcessPointD { get; set; }
+
+        public DbSet<ProcessPoint> ProcessPoint { get; set; }
+
+        //public DbSet<ProcessPointA> ProcessPointA { get; set; }
+        //public DbSet<ProcessPointB> ProcessPointB { get; set; }
+        //public DbSet<ProcessPointC> ProcessPointC { get; set; }
+        //public DbSet<ProcessPointD> ProcessPointD { get; set; }
+
         public DbSet<SimulationModel> SimulationModel { get; set; }
 
 
@@ -36,7 +40,7 @@ namespace ProcessManagement.DataStorage.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // ensures that all process point entities has the baseclass properties in the table
-            modelBuilder.Entity<ProcessPoint>().ToTable("ProcessPoint");
+            //modelBuilder.Entity<ProcessPoint>().ToTable("ProcessPoint");
 
             // mapping a .NET property as a discriminator
             modelBuilder.Entity<ProcessPointA>().HasDiscriminator(p => p.ProcessPointTypeName);

@@ -1,4 +1,5 @@
-﻿using inotech.Core;
+﻿using DataAccess;
+using inotech.Core;
 using Process.Editor.Elements;
 using Process.Editor.Services;
 using ProcessManagement.Core;
@@ -31,34 +32,6 @@ namespace Process.Editor.ViewModels
             set { SetField(ref _copiedProcessPoint, value); }
         }
 
-
-        #region Add processpoint command
-
-        public DelegateCommand AddProcessPointCommand { get; }
-
-        private bool CanExecuteAddProcessPoint(object obj)
-        {
-            return !(SelectedProcessGroup == null);
-        }
-
-        private void ExecuteAddProcessPoint(object obj)
-        {
-            if(SelectedProcessGroup == null)
-                return;
-
-            if(SelectedProcessGroup.ItemCollection == null)
-                return;
-
-            ISortableItem newProcessPoint = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcessPoint(_getterService.GetIDList(SelectedProcessGroup.ItemCollection), SelectedProcessGroup.ItemCollection.Count, _pointTypeNameList);
-
-            if(newProcessPoint == null)
-                return;
-
-            AddItemService addItemService = new AddItemService();
-            addItemService.AddService(SelectedProcessGroup.ItemCollection, (ProcessPoint)newProcessPoint);
-        }
-
-        #endregion
 
         #region Processpoint down Command
 
@@ -178,6 +151,40 @@ namespace Process.Editor.ViewModels
 
         #endregion
 
+        #region Add processpoint command
+
+        public DelegateCommand AddProcessPointCommand { get; }
+
+        private bool CanExecuteAddProcessPoint(object obj)
+        {
+            return !(SelectedProcessGroup == null);
+        }
+
+        private void ExecuteAddProcessPoint(object obj)
+        {
+            if(SelectedProcessGroup == null)
+                return;
+
+            if(SelectedProcessGroup.ItemCollection == null)
+                return;
+
+            ISortableItem newProcessPoint = ServiceLocator.Default.GetService<ICreateNewItem>().SetNewProcessPoint(_getterService.GetIDList(SelectedProcessGroup.ItemCollection), SelectedProcessGroup.ItemCollection.Count, _pointTypeNameList);
+
+            if(newProcessPoint == null)
+                return;
+
+            AddItemService addItemService = new AddItemService();
+            addItemService.AddService(SelectedProcessGroup.ItemCollection, (ProcessPoint)newProcessPoint);
+
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                uow.SaveChanges();
+            }
+        }
+
+        #endregion
+
         #region delete process point Command
 
         public DelegateCommand DeleteProcessPointCommand { get; private set; }
@@ -189,11 +196,16 @@ namespace Process.Editor.ViewModels
 
         private void ExecuteDeleteProcessPoint(object obj)
         {
-            MessageBoxResult result = new MessageBoxResult();
-
-            result = MessageBox.Show("Are you sure you want to delete the process point?", "Delete Processpoint", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process point?", "Delete Processpoint", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
+                // removing selected processpoint from Database
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    uow.ProcessPointRepo.Delete(SelectedProcessPoint);
+                    uow.SaveChanges();
+                }
+
                 SelectedProcessGroup.ItemCollection.Remove(SelectedProcessPoint);
 
                 int i = 1;
@@ -202,6 +214,14 @@ namespace Process.Editor.ViewModels
                     processPointModel.SortingNumber = i;
                     i++;
                 }
+
+                // to ensure that when sorting number changes, it is also editted in database
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    uow.ProcessPointRepo.UpdateAll(SelectedProcessGroup.ItemCollection);
+                    uow.SaveChanges();
+                }
+
             }
         }
 
