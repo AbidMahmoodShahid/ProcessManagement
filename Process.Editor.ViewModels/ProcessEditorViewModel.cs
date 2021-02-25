@@ -5,6 +5,7 @@ using ProcessManagement.Core;
 using System.Collections.ObjectModel;
 using System.Windows;
 using DataAccess;
+using System.Collections.Generic;
 
 namespace Process.Editor.ViewModels
 {

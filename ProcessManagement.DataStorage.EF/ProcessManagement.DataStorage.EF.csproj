@@ -175,6 +175,26 @@
     <Compile Include="Migrations\20210225070248_testAC.designer.cs">
       <DependentUpon>20210225070248_testAC.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210225084322_OneProcessPointDbSet.cs" />
+    <Compile Include="Migrations\20210225084322_OneProcessPointDbSet.designer.cs">
+      <DependentUpon>20210225084322_OneProcessPointDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225090529_WithProcessPointDbSet.cs" />
+    <Compile Include="Migrations\20210225090529_WithProcessPointDbSet.designer.cs">
+      <DependentUpon>20210225090529_WithProcessPointDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225091311_ProcessPointHasValue.cs" />
+    <Compile Include="Migrations\20210225091311_ProcessPointHasValue.designer.cs">
+      <DependentUpon>20210225091311_ProcessPointHasValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225091618_TestingOld.cs" />
+    <Compile Include="Migrations\20210225091618_TestingOld.designer.cs">
+      <DependentUpon>20210225091618_TestingOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225094437_ManualDiscriminator.cs" />
+    <Compile Include="Migrations\20210225094437_ManualDiscriminator.designer.cs">
+      <DependentUpon>20210225094437_ManualDiscriminator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessManagement.DataStorage.EF;
 
 namespace ProcessManagement.DataStorage.EF.Migrations
 {
     [DbContext(typeof(PMDataContext))]
-    partial class PMDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210225094437_ManualDiscriminator")]
+    partial class ManualDiscriminator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

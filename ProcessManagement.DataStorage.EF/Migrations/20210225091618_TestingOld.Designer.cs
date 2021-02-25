@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessManagement.DataStorage.EF;
 
 namespace ProcessManagement.DataStorage.EF.Migrations
 {
     [DbContext(typeof(PMDataContext))]
-    partial class PMDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210225091618_TestingOld")]
+    partial class TestingOld
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,11 +81,8 @@ namespace ProcessManagement.DataStorage.EF.Migrations
                     b.Property<int>("ProcessGroupModelId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProcessPointType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ProcessPointTypeName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SortingNumber")
@@ -95,7 +94,7 @@ namespace ProcessManagement.DataStorage.EF.Migrations
 
                     b.ToTable("ProcessPoint");
 
-                    b.HasDiscriminator<string>("ProcessPointType").HasValue("ProcessPoint");
+                    b.HasDiscriminator<string>("ProcessPointTypeName").HasValue("ProcessPoint");
                 });
 
             modelBuilder.Entity("Process.Simulation.Elements.SimulationModel", b =>

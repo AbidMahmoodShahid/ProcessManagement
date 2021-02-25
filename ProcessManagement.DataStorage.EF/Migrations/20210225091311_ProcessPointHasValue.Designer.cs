@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessManagement.DataStorage.EF;
 
 namespace ProcessManagement.DataStorage.EF.Migrations
 {
     [DbContext(typeof(PMDataContext))]
-    partial class PMDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210225091311_ProcessPointHasValue")]
+    partial class ProcessPointHasValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +81,8 @@ namespace ProcessManagement.DataStorage.EF.Migrations
                     b.Property<int>("ProcessGroupModelId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProcessPointType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProcessPointType")
+                        .HasColumnType("int");
 
                     b.Property<string>("ProcessPointTypeName")
                         .HasColumnType("nvarchar(max)");
@@ -95,7 +96,7 @@ namespace ProcessManagement.DataStorage.EF.Migrations
 
                     b.ToTable("ProcessPoint");
 
-                    b.HasDiscriminator<string>("ProcessPointType").HasValue("ProcessPoint");
+                    b.HasDiscriminator<int>("ProcessPointType");
                 });
 
             modelBuilder.Entity("Process.Simulation.Elements.SimulationModel", b =>
@@ -138,28 +139,28 @@ namespace ProcessManagement.DataStorage.EF.Migrations
                 {
                     b.HasBaseType("Process.Editor.Elements.ProcessPoint");
 
-                    b.HasDiscriminator().HasValue("ProcessPointA");
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("Process.Editor.Elements.ProcessPointB", b =>
                 {
                     b.HasBaseType("Process.Editor.Elements.ProcessPoint");
 
-                    b.HasDiscriminator().HasValue("ProcessPointB");
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("Process.Editor.Elements.ProcessPointC", b =>
                 {
                     b.HasBaseType("Process.Editor.Elements.ProcessPoint");
 
-                    b.HasDiscriminator().HasValue("ProcessPointC");
+                    b.HasDiscriminator().HasValue(3);
                 });
 
             modelBuilder.Entity("Process.Editor.Elements.ProcessPointD", b =>
                 {
                     b.HasBaseType("Process.Editor.Elements.ProcessPoint");
 
-                    b.HasDiscriminator().HasValue("ProcessPointD");
+                    b.HasDiscriminator().HasValue(4);
                 });
 
             modelBuilder.Entity("Process.Editor.Elements.ProcessGroupModel", b =>

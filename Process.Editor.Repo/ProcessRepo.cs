@@ -19,9 +19,7 @@ namespace Process.Editor.Repo
 
         public List<ProcessModel> GetAll()
         {
-            //return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList(); //TODO AM: ThenInclude not working
-            var x = _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
-            return x;
+            return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
         }
 
         public void Attach(ProcessModel processModel)
