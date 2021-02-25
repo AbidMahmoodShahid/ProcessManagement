@@ -159,6 +159,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ProcessPointConfig.cs" />
     <Compile Include="Migrations\20210202140238_ProcessManagementDBInitial.cs" />
     <Compile Include="Migrations\20210202140238_ProcessManagementDBInitial.designer.cs">
       <DependentUpon>20210202140238_ProcessManagementDBInitial.cs</DependentUpon>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Process.Editor.Elements;
 using Process.Simulation.Elements;
+using ProcessManagement.DataStorage.EF.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,14 +34,7 @@ namespace ProcessManagement.DataStorage.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProcessPoint>()
-           .ToTable("ProcessPoint")
-           .HasDiscriminator<string>("ProcessPointType")
-           .HasValue<ProcessPointA>("ProcessPointA")
-           .HasValue<ProcessPointB>("ProcessPointB")
-           .HasValue<ProcessPointC>("ProcessPointC")
-           .HasValue<ProcessPointD>("ProcessPointD");
-
+            ProcessPointConfig.ApplyProcessConfig(modelBuilder);
         }
 
     }
