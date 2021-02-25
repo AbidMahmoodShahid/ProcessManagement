@@ -50,7 +50,7 @@ namespace Process.Simulation.Services
 
         public void ResetSimulation(ISimulationViewModel simulationVM)
         {
-            foreach(SimulationModel processPoint in simulationVM.ProcessPointSimulationList)
+            foreach(SimulationPointModel processPoint in simulationVM.ProcessPointSimulationList)
             {
                 processPoint.IsUnderProcess = null;
                 processPoint.SimulationStatus = "Unprocessed";
@@ -83,14 +83,14 @@ namespace Process.Simulation.Services
             simulationVM.CTS.Dispose();
         }
 
-        private SimulationModel GetNextPoint(ObservableCollection<SimulationModel> processPointSimulationList, SimulationModel currentPoint)
+        private SimulationPointModel GetNextPoint(ObservableCollection<SimulationPointModel> processPointSimulationList, SimulationPointModel currentPoint)
         {
             int newPointIndex = processPointSimulationList.IndexOf(currentPoint) + 1;
 
             bool deactivatedPoint = true;
             while(deactivatedPoint && newPointIndex < processPointSimulationList.Count)
             {
-                SimulationModel processSimulationModel = processPointSimulationList[newPointIndex];
+                SimulationPointModel processSimulationModel = processPointSimulationList[newPointIndex];
                 deactivatedPoint = processSimulationModel.Deactivated;
 
                 if(deactivatedPoint)

@@ -4,8 +4,8 @@ namespace Process.Simulation.Elements
 {
     public interface ISimulationErrorHandler
     {
-        SimulationModel CurrentPoint { get; set; }
+        SimulationPointModel CurrentPoint { get; set; }
 
-        ObservableCollection<SimulationModel> ProcessPointSimulationList { get; set; }
+        ObservableCollection<SimulationPointModel> ProcessPointSimulationList { get; set; }
     }
 }

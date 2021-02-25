@@ -17,14 +17,9 @@ namespace ProcessManagement.DataStorage.EF
         //entities TODO AM: Check Loading Abstract Class
         public DbSet<ProcessModel> Process { get; set; }
         public DbSet<ProcessGroupModel> ProcessGroup { get; set; }
-
         public DbSet<ProcessPoint> ProcessPoint { get; set; }
-        public DbSet<ProcessPointA> ProcessPointA { get; set; }
-        public DbSet<ProcessPointB> ProcessPointB { get; set; }
-        public DbSet<ProcessPointC> ProcessPointC { get; set; }
-        public DbSet<ProcessPointD> ProcessPointD { get; set; }
 
-        public DbSet<SimulationModel> SimulationModel { get; set; }
+        public DbSet<SimulationPointModel> SimulationPoint { get; set; }
 
 
         public PMDataContext()

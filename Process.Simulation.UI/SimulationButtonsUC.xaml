@@ -15,6 +15,7 @@
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
 
         <Button
@@ -37,6 +38,11 @@
             Margin="10"
             Command="{Binding CancelCommand}"
             Content="Cancel" />
+        <Button
+            Grid.Column="4"
+            Margin="10"
+            Command="{Binding SaveCommand}"
+            Content="Save" />
 
     </Grid>
 

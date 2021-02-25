@@ -1,4 +1,5 @@
-﻿using inotech.Core;
+﻿using DataAccess;
+using inotech.Core;
 using Process.Editor.Elements;
 using Process.Simulation.Elements;
 using Process.Simulation.Services;
@@ -25,6 +26,7 @@ namespace Process.Simulation.ViewModels
             PauseCommand = new DelegateCommand(ExecutePause, CanExecutePause);
             CancelCommand = new DelegateCommand(ExecuteCancel, CanExecuteCancel);
             ResetCommand = new DelegateCommand(ExecuteReset, CanExecuteReset);
+            SaveCommand = new DelegateCommand(ExecuteSave, CanExecuteSave);
             CTS = new CancellationTokenSource();
             CreateSimulationList();
         }
@@ -62,7 +64,7 @@ namespace Process.Simulation.ViewModels
             set { SetField(ref _processID, value); }
         }
 
-        public SimulationModel CurrentPoint { get; set; }
+        public SimulationPointModel CurrentPoint { get; set; }
 
         private Visibility _simulationUCVisibility;
         public Visibility SimulationUCVisibility
@@ -109,30 +111,55 @@ namespace Process.Simulation.ViewModels
             }
         }
 
-        private ObservableCollection<SimulationModel> _processPointSimulationList;
-        public ObservableCollection<SimulationModel> ProcessPointSimulationList
+        private ObservableCollection<SimulationPointModel> _processPointSimulationList;
+        public ObservableCollection<SimulationPointModel> ProcessPointSimulationList
         {
             get { return _processPointSimulationList; }
             set { SetField(ref _processPointSimulationList, value); }
         }
 
+        public SimulationProcessModel SimulationProcess { get; set; }
 
         #endregion
+
+        //private void LoadAllSimulationPoints()
+        //{
+        //    SimulationProcess.ProcessModelId = ProcessModel.ProcessModelId;
+        //    SimulationProcess.Id = ProcessModel.Id;
+        //    SimulationProcess.Name = ProcessModel.Name;
+
+        //    foreach(ProcessGroupModel processGroupModel in ProcessModel.ItemCollection)
+        //    {
+        //        foreach(ProcessPoint processPointModel in processGroupModel.ItemCollection)
+        //        {
+        //            SimulationPointModel processSimulationModel = new SimulationPointModel(processPointModel.Id, processPointModel.Name, processPointModel.SortingNumber);
+        //            SimulationProcess.SimulationPointModelList.Add(processSimulationModel);
+        //        }
+        //    }
+        //}
 
         #region create list
 
         public void CreateSimulationList()
         {
-            ProcessPointSimulationList = new ObservableCollection<SimulationModel>();
+            ProcessPointSimulationList = new ObservableCollection<SimulationPointModel>();
 
             foreach(ProcessGroupModel processGroupModel in ProcessModel.ItemCollection)
             {
                 foreach(ProcessPoint processPointModel in processGroupModel.ItemCollection)
                 {
-                    SimulationModel processSimulationModel = new SimulationModel(processPointModel.Id, processPointModel.Name, processPointModel.SortingNumber);
+                    SimulationPointModel processSimulationModel = new SimulationPointModel(processPointModel.Id, processPointModel.Name, processPointModel.SortingNumber);
+                    processSimulationModel.SimulationPointId = processPointModel.ProcessPointID;
                     ProcessPointSimulationList.Add(processSimulationModel);
                 }
             }
+
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.SimulationPointRepo.AttachRange(ProcessPointSimulationList);
+                uow.SaveChanges();
+            }
+
         }
 
         #endregion
@@ -201,6 +228,26 @@ namespace Process.Simulation.ViewModels
         {
             SimulationService simulationServices = new SimulationService();
             simulationServices.ResetSimulation(this);
+        }
+
+        #endregion
+
+        #region save
+
+        public DelegateCommand SaveCommand { get; private set; }
+
+        private bool CanExecuteSave(object obj)
+        {
+            return true;
+        }
+
+        private void ExecuteSave(object obj)
+        {
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.SimulationPointRepo.UpdateAll(ProcessPointSimulationList);
+                uow.SaveChanges();
+            }
         }
 
         #endregion

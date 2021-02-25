@@ -57,6 +57,10 @@
       <Project>{c8b288d2-f44e-427d-8743-e6f62537d28b}</Project>
       <Name>Process.Simulation.Elements</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Process.Simulation.Repo\Process.Simulation.Repo.csproj">
+      <Project>{8c8bbaa2-fe03-4b15-b967-830dacf82c43}</Project>
+      <Name>Process.Simulation.Repo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Process.Simulation.Services\Process.Simulation.Services.csproj">
       <Project>{34391e81-1cb6-4f4e-badb-4fc4d50c4345}</Project>
       <Name>Process.Simulation.Services</Name>
@@ -64,6 +68,10 @@
     <ProjectReference Include="..\ProcessManagement.Core\ProcessManagement.Core.csproj">
       <Project>{2368e53d-8826-47f8-8c7e-7b1c38bebf96}</Project>
       <Name>ProcessManagement.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitOfWork\UnitOfWork.csproj">
+      <Project>{b7e0d0e7-ba4f-48c6-b2f8-c8d99fce75a3}</Project>
+      <Name>UnitOfWork</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace Process.Simulation.Services
             ResetErrorPoint(simulationErrorEventArgs.SimulationErrorHandler);
         }
 
-        private void SetPointError(SimulationModel currentPoint)
+        private void SetPointError(SimulationPointModel currentPoint)
         {
             currentPoint.SimulationError = true;
             currentPoint.IsUnderProcess = null;

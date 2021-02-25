@@ -51,8 +51,9 @@
     <Compile Include="ISimulationViewModel.cs" />
     <Compile Include="ISimulationUpdater.cs" />
     <Compile Include="SimulationErrorEventArgs.cs" />
-    <Compile Include="SimulationModel.cs" />
+    <Compile Include="SimulationPointModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationProcessModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Process.Editor.Elements\Process.Editor.Elements.csproj">

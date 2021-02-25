@@ -195,6 +195,18 @@
     <Compile Include="Migrations\20210225094437_ManualDiscriminator.designer.cs">
       <DependentUpon>20210225094437_ManualDiscriminator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210225115053_RemovedProcessPointTypeDbSet.cs" />
+    <Compile Include="Migrations\20210225115053_RemovedProcessPointTypeDbSet.designer.cs">
+      <DependentUpon>20210225115053_RemovedProcessPointTypeDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225123112_SimulationPointTypeDbSet.cs" />
+    <Compile Include="Migrations\20210225123112_SimulationPointTypeDbSet.designer.cs">
+      <DependentUpon>20210225123112_SimulationPointTypeDbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210225123242_SimulationPointId.cs" />
+    <Compile Include="Migrations\20210225123242_SimulationPointId.designer.cs">
+      <DependentUpon>20210225123242_SimulationPointId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

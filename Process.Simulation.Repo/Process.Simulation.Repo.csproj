@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Process.Editor.Repo\Process.Editor.Repo.csproj" />
-    <ProjectReference Include="..\Process.Simulation.Repo\Process.Simulation.Repo.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Process.Simulation.Elements\Process.Simulation.Elements.csproj" />
     <ProjectReference Include="..\ProcessManagement.DataStorage.EF\ProcessManagement.DataStorage.EF.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using Process.Editor.Elements;
 using Process.Editor.Repo;
+using Process.Simulation.Repo;
 using ProcessManagement.DataStorage.EF;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,18 @@ namespace DataAccess
                     _processPointRepo = new ProcessPointRepo(_pMDataContext);
 
                 return _processPointRepo;
+            }
+        }
+
+        private ISimulationPointRepo _simulationPointRepo;
+        public ISimulationPointRepo SimulationPointRepo
+        {
+            get
+            {
+                if(_simulationPointRepo == null)
+                    _simulationPointRepo = new SimulationPointRepo(_pMDataContext);
+
+                return _simulationPointRepo;
             }
         }
 

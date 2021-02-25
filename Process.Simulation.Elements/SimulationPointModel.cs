@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Process.Simulation.Elements
 {
-    public class SimulationModel : PropertyChangedNotifier
+    public class SimulationPointModel : PropertyChangedNotifier
     {
-        public SimulationModel(string processPointId, string processPointName, int sortingNumber)
+        public SimulationPointModel(string processPointId, string processPointName, int sortingNumber)
         {
             ProcessPointId = processPointId;
             ProcessPointName = processPointName;
@@ -13,12 +13,12 @@ namespace Process.Simulation.Elements
             IsUnderProcess = null;
             SimulationStatus = "Unprocessed";
         }
-        public SimulationModel()
+        public SimulationPointModel()
         { }
 
         //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
         [Key]
-        public int SimulationModelId { get; set; }
+        public int SimulationPointId { get; set; }
 
         public string ProcessPointId { get; private set; }
 
