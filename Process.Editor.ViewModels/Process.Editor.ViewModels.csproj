@@ -102,9 +102,9 @@
       <Project>{2368e53d-8826-47f8-8c7e-7b1c38bebf96}</Project>
       <Name>ProcessManagement.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnitOfWork\UnitOfWork.csproj">
+    <ProjectReference Include="..\UnitOfWork\DataAccess.csproj">
       <Project>{b7e0d0e7-ba4f-48c6-b2f8-c8d99fce75a3}</Project>
-      <Name>UnitOfWork</Name>
+      <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

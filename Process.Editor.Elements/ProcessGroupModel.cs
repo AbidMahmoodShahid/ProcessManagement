@@ -1,4 +1,5 @@
 ﻿using inotech.Core;
+using ProcessManagement.Core;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
