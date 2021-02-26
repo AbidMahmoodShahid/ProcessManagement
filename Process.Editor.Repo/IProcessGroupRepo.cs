@@ -14,6 +14,10 @@ namespace Process.Editor.Repo
 
         void AddOrUpdateRange(ObservableCollection<ProcessGroupModel> processGroupModel);
 
+        void Update(ProcessGroupModel processGroupModel);
+
+        void UpdateRange(ObservableCollection<ProcessGroupModel> processGroupModel);
+
         void Delete(ProcessGroupModel processGroupModel);
     }
 }

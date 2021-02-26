@@ -202,28 +202,28 @@ namespace Process.Editor.ViewModels
             if(result != MessageBoxResult.Yes)
                 return;
 
-            //TODO AM: Reasearch Bug
+            //TODO AM: Reasearch Bug --> 
+            // have to untrack item from repository before deleting from viemodel collection
+            // if the item is not untracked, the item is added back to the viewmodel-list on untracking from repository
+
             ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                uow.SaveChanges();
-            }
-
-            SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
-
-            if(SelectedProcess.ItemCollection.Count < 1)
-                return;
-
-            for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
-            {
-                SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
-            }
-
-            using(UnitOfWork uow = new UnitOfWork())
-            {
                 //uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
+                SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
+
+                if(SelectedProcess.ItemCollection.Count > 0)
+                {
+                    for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
+                    {
+                        SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
+                    }
+                }
+
+                //uow.ProcessRepo.AttachOrUpdate(SelectedProcess);
+                //uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
+                uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
+                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
                 uow.SaveChanges();
             }
 

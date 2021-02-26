@@ -34,6 +34,16 @@ namespace Process.Editor.Repo
             _pMDataContext.AttachRange(processGroupList);
         }
 
+        public void Update(ProcessGroupModel processGroupModel)
+        {
+            _pMDataContext.ProcessGroup.Update(processGroupModel);
+        }
+
+        public void UpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        {
+            _pMDataContext.UpdateRange(processGroupList);
+        }
+
         public void Delete(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Remove(processGroupModel);
