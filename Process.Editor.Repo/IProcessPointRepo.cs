@@ -10,11 +10,9 @@ namespace Process.Editor.Repo
     {
         List<ProcessPoint> GetAll();
 
-        void Attach(ProcessPoint processPointModel);
+        void AttachOrUpdate(ProcessPoint processPointModel);
 
-        void Update(ProcessPoint processPointModel);
-
-        void UpdateAll(ObservableCollection<ProcessPoint> processPointList);
+        void AttachOrUpdateRange(ObservableCollection<ProcessPoint> processPointList);
 
         void Delete(ProcessPoint processPointModel);
     }

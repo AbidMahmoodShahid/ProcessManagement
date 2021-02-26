@@ -179,7 +179,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.Update(SelectedProcess);
+                uow.ProcessRepo.AttachOrUpdate(SelectedProcess);
                 uow.SaveChanges();
             }
         }
@@ -202,7 +202,7 @@ namespace Process.Editor.ViewModels
             if(result != MessageBoxResult.Yes)
                 return;
 
-            //TODO AM: Bug
+            //TODO AM: Reasearch Bug
             ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
             SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
 
@@ -214,7 +214,6 @@ namespace Process.Editor.ViewModels
                 SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
             }
 
-            // to ensure that when sorting number changes, it is also editted in database
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);

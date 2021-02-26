@@ -10,10 +10,10 @@ namespace Process.Editor.Repo
     {
         List<ProcessModel> GetAll();
 
-        void Attach(ProcessModel processModel);
+        void AttachOrUpdate(ProcessModel processModel);
+
+        void AttachOrUpdateRange(ObservableCollection<ProcessModel> processModel);
 
         void Delete(ProcessModel processModel);
-
-        void Update(ProcessModel processModel);
     }
 }

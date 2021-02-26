@@ -23,19 +23,19 @@ namespace Process.Editor.Repo
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
         }
 
-        public void Attach(ProcessModel processModel)
+        public void AttachOrUpdate(ProcessModel processModel)
         {
-            _pMDataContext.Process.Attach(processModel); //TODO AM: see difference between add and attach
+            _pMDataContext.Process.Attach(processModel);
+        }
+
+        public void AttachOrUpdateRange(ObservableCollection<ProcessModel> processModelList)
+        {
+            _pMDataContext.Process.AttachRange(processModelList);
         }
 
         public void Delete(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);
-        }
-
-        public void Update(ProcessModel processModel)
-        {
-            _pMDataContext.Update(processModel);
         }
     }
 }

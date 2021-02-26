@@ -178,7 +178,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                uow.ProcessGroupRepo.AddOrUpdate(SelectedProcessGroup);
                 uow.SaveChanges();
             }
         }
@@ -218,7 +218,7 @@ namespace Process.Editor.ViewModels
                 // to ensure that when sorting number changes, it is also editted in database
                 using(UnitOfWork uow = new UnitOfWork())
                 {
-                    uow.ProcessPointRepo.UpdateAll(SelectedProcessGroup.ItemCollection);
+                    uow.ProcessPointRepo.AttachOrUpdateRange(SelectedProcessGroup.ItemCollection);
                     uow.SaveChanges();
                 }
 

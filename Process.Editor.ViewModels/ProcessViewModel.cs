@@ -194,7 +194,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.Attach((ProcessModel)newProcess);
+                uow.ProcessRepo.AttachOrUpdate((ProcessModel)newProcess);
                 uow.SaveChanges();
             }
         }

@@ -23,19 +23,14 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessPoint.ToList();
         }
 
-        public void Attach(ProcessPoint processPointModel)
+        public void AttachOrUpdate(ProcessPoint processPointModel)
         {
             _pMDataContext.ProcessPoint.Attach(processPointModel);
         }
 
-        public void Update(ProcessPoint processPoint)
+        public void AttachOrUpdateRange(ObservableCollection<ProcessPoint> processPointList)
         {
-            _pMDataContext.Update(processPoint);
-        }
-
-        public void UpdateAll(ObservableCollection<ProcessPoint> processPointList)
-        {
-            _pMDataContext.UpdateRange(processPointList);
+            _pMDataContext.ProcessPoint.AttachRange(processPointList);
         }
 
         public void Delete(ProcessPoint processPointModel)

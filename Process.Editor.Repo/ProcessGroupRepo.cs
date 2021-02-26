@@ -24,7 +24,6 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessGroup.Include(pP => pP.ItemCollection).ToList();
         }
 
-        //TODO AM: fix everywhere
         public void AddOrUpdate(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Attach(processGroupModel);
@@ -34,12 +33,6 @@ namespace Process.Editor.Repo
         {
             _pMDataContext.AttachRange(processGroupList);
         }
-
-        public void Update(ProcessGroupModel processGroup)
-        {
-            _pMDataContext.Attach(processGroup);
-        }
-
 
         public void Delete(ProcessGroupModel processGroupModel)
         {
