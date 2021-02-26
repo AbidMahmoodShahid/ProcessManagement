@@ -204,6 +204,12 @@ namespace Process.Editor.ViewModels
 
             //TODO AM: Reasearch Bug
             ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
+            using(UnitOfWork uow = new UnitOfWork())
+            {
+                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
+                uow.SaveChanges();
+            }
+
             SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
 
             if(SelectedProcess.ItemCollection.Count < 1)
@@ -216,7 +222,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
+                //uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
                 uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
                 uow.SaveChanges();
             }
