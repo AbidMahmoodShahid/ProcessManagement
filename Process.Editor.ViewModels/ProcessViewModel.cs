@@ -179,7 +179,7 @@ namespace Process.Editor.ViewModels
 
         public DelegateCommand AddProcessCommand { get; }
 
-        private void ExecuteAddProcess(object obj)
+        private async void ExecuteAddProcess(object obj)
         {
             if(ItemCollection == null)
                 return;
@@ -195,7 +195,7 @@ namespace Process.Editor.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessRepo.AttachOrUpdate((ProcessModel)newProcess);
-                uow.SaveChanges();
+                await uow.SaveChanges();
             }
         }
 
