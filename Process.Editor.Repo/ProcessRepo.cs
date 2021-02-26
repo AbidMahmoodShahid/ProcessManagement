@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Process.Editor.Repo
 {
@@ -18,8 +19,9 @@ namespace Process.Editor.Repo
         }
 
         //TODO AM: implement baseclass
-        public List<ProcessModel> GetAll()
+        public async Task<List<ProcessModel>> GetAll()
         {
+            await Task.Delay(5000);
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
         }
 

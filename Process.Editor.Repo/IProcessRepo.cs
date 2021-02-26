@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Process.Editor.Repo
 {
     public interface IProcessRepo
     {
-        List<ProcessModel> GetAll();
+        Task<List<ProcessModel>> GetAll();
 
         void AttachOrUpdate(ProcessModel processModel);
 

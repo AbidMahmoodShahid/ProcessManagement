@@ -42,11 +42,11 @@ namespace Process.Editor.ViewModels
                 LoadAll();
         }
 
-        private void LoadAll()
+        private async void LoadAll()
         {
             using(UnitOfWork uow = new UnitOfWork())
             {
-                ItemCollection = new ObservableCollection<ProcessModel>(uow.ProcessRepo.GetAll());
+                ItemCollection = new ObservableCollection<ProcessModel>(await uow.ProcessRepo.GetAll());
             }
         }
 
