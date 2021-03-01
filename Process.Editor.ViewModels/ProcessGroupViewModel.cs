@@ -161,7 +161,7 @@ namespace Process.Editor.ViewModels
             return !(SelectedProcess == null);
         }
 
-        private void ExecuteAddProcessGroup(object obj)
+        private async void ExecuteAddProcessGroup(object obj)
         {
             if(SelectedProcess == null)
                 return;
@@ -179,8 +179,8 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.AttachOrUpdate(SelectedProcess);
-                uow.SaveChanges();
+                uow.ProcessRepo.Update(SelectedProcess);
+                await uow.SaveChanges();
             }
         }
 
@@ -196,7 +196,7 @@ namespace Process.Editor.ViewModels
             return !(SelectedProcessGroup == null);
         }
 
-        private void ExecuteDeleteProcessGroup(object obj)
+        private async void ExecuteDeleteProcessGroup(object obj)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process group?", "Delete Processgroup", MessageBoxButton.YesNo);
             if(result != MessageBoxResult.Yes)
@@ -204,27 +204,21 @@ namespace Process.Editor.ViewModels
 
             //TODO AM: Reasearch Bug
             ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
-            using(UnitOfWork uow = new UnitOfWork())
-            {
-                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                uow.SaveChanges();
-            }
 
             SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
-
-            if(SelectedProcess.ItemCollection.Count < 1)
-                return;
-
-            for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
+            if(SelectedProcess.ItemCollection.Count > 0)
             {
-                SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
+                for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
+                {
+                    SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
+                }
             }
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                //uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
-                uow.SaveChanges();
+                uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
+                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
+                await uow.SaveChanges();
             }
 
         }

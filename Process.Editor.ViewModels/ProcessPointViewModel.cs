@@ -160,7 +160,7 @@ namespace Process.Editor.ViewModels
             return !(SelectedProcessGroup == null);
         }
 
-        private void ExecuteAddProcessPoint(object obj)
+        private async void ExecuteAddProcessPoint(object obj)
         {
             if(SelectedProcessGroup == null)
                 return;
@@ -178,8 +178,8 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.AddOrUpdate(SelectedProcessGroup);
-                uow.SaveChanges();
+                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                await uow.SaveChanges();
             }
         }
 
@@ -194,32 +194,28 @@ namespace Process.Editor.ViewModels
             return !(SelectedProcessPoint == null);
         }
 
-        private void ExecuteDeleteProcessPoint(object obj)
+        private async void ExecuteDeleteProcessPoint(object obj)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process point?", "Delete Processpoint", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
-                // removing selected processpoint from Database
-                using(UnitOfWork uow = new UnitOfWork())
-                {
-                    uow.ProcessPointRepo.Delete(SelectedProcessPoint);
-                    uow.SaveChanges();
-                }
-
                 SelectedProcessGroup.ItemCollection.Remove(SelectedProcessPoint);
 
-                int i = 1;
-                foreach(ProcessPoint processPointModel in SelectedProcessGroup.ItemCollection)
+                if(SelectedProcessGroup.ItemCollection.Count > 0)
                 {
-                    processPointModel.SortingNumber = i;
-                    i++;
+                    for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
+                    {
+                        SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
+                        i++;
+                    }
                 }
 
-                // to ensure that when sorting number changes, it is also editted in database
+
                 using(UnitOfWork uow = new UnitOfWork())
                 {
-                    uow.ProcessPointRepo.AttachOrUpdateRange(SelectedProcessGroup.ItemCollection);
-                    uow.SaveChanges();
+                    uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection);
+                    uow.ProcessPointRepo.Delete(SelectedProcessPoint);
+                    await uow.SaveChanges();
                 }
 
             }

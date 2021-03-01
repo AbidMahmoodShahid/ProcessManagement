@@ -21,18 +21,27 @@ namespace Process.Editor.Repo
         //TODO AM: implement baseclass
         public async Task<List<ProcessModel>> GetAll()
         {
-            await Task.Delay(5000);
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
         }
 
-        public void AttachOrUpdate(ProcessModel processModel)
+        public void Attach(ProcessModel processModel)
         {
             _pMDataContext.Process.Attach(processModel);
         }
 
-        public void AttachOrUpdateRange(ObservableCollection<ProcessModel> processModelList)
+        public void AttachRange(ObservableCollection<ProcessModel> processModelList)
         {
             _pMDataContext.Process.AttachRange(processModelList);
+        }
+
+        public void Update(ProcessModel processModel)
+        {
+            _pMDataContext.Process.Update(processModel);
+        }
+
+        public void UpdateRange(ObservableCollection<ProcessModel> processModelList)
+        {
+            _pMDataContext.Process.UpdateRange(processModelList);
         }
 
         public void Delete(ProcessModel processModel)

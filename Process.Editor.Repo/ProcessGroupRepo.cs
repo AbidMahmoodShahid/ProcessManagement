@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Process.Editor.Repo
 {
@@ -19,19 +20,29 @@ namespace Process.Editor.Repo
         }
 
 
-        public List<ProcessGroupModel> GetAll()
+        public async Task<List<ProcessGroupModel>> GetAll()
         {
             return _pMDataContext.ProcessGroup.Include(pP => pP.ItemCollection).ToList();
         }
 
-        public void AddOrUpdate(ProcessGroupModel processGroupModel)
+        public void Add(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Attach(processGroupModel);
         }
 
-        public void AddOrUpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        public void AddRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
             _pMDataContext.AttachRange(processGroupList);
+        }
+
+        public void Update(ProcessGroupModel processGroupModel)
+        {
+            _pMDataContext.ProcessGroup.Update(processGroupModel);
+        }
+
+        public void UpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        {
+            _pMDataContext.UpdateRange(processGroupList);
         }
 
         public void Delete(ProcessGroupModel processGroupModel)

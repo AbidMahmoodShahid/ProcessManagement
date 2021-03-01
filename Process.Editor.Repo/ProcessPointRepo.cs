@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Process.Editor.Repo
 {
@@ -18,19 +19,29 @@ namespace Process.Editor.Repo
         }
 
 
-        public List<ProcessPoint> GetAll()
+        public async Task<List<ProcessPoint>> GetAll()
         {
             return _pMDataContext.ProcessPoint.ToList();
         }
 
-        public void AttachOrUpdate(ProcessPoint processPointModel)
+        public void Attach(ProcessPoint processPointModel)
         {
             _pMDataContext.ProcessPoint.Attach(processPointModel);
         }
 
-        public void AttachOrUpdateRange(ObservableCollection<ProcessPoint> processPointList)
+        public void AttachRange(ObservableCollection<ProcessPoint> processPointList)
         {
             _pMDataContext.ProcessPoint.AttachRange(processPointList);
+        }
+
+        public void Update(ProcessPoint processPointModel)
+        {
+            _pMDataContext.ProcessPoint.Update(processPointModel);
+        }
+
+        public void UpdateRange(ObservableCollection<ProcessPoint> processPointList)
+        {
+            _pMDataContext.ProcessPoint.UpdateRange(processPointList);
         }
 
         public void Delete(ProcessPoint processPointModel)

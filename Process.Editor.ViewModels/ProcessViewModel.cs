@@ -194,7 +194,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.AttachOrUpdate((ProcessModel)newProcess);
+                uow.ProcessRepo.Attach((ProcessModel)newProcess);
                 await uow.SaveChanges();
             }
         }
@@ -210,7 +210,7 @@ namespace Process.Editor.ViewModels
             return !(SelectedProcess == null);
         }
 
-        private void ExecuteDeleteProcess(object obj)
+        private async void ExecuteDeleteProcess(object obj)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process?", "Delete Process", MessageBoxButton.YesNo);
             if(result != MessageBoxResult.Yes)
@@ -220,7 +220,7 @@ namespace Process.Editor.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessRepo.Delete(SelectedProcess);
-                uow.SaveChanges();
+                await uow.SaveChanges();
             }
 
             // removing selected Process in ViewModel

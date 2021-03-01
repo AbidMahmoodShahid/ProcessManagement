@@ -3,16 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Process.Editor.Repo
 {
     public interface IProcessPointRepo
     {
-        List<ProcessPoint> GetAll();
+        Task<List<ProcessPoint>> GetAll();
 
-        void AttachOrUpdate(ProcessPoint processPointModel);
+        void Attach(ProcessPoint processPointModel);
 
-        void AttachOrUpdateRange(ObservableCollection<ProcessPoint> processPointList);
+        void AttachRange(ObservableCollection<ProcessPoint> processPointList);
+
+        void Update(ProcessPoint processPointModel);
+
+        void UpdateRange(ObservableCollection<ProcessPoint> processPointList);
 
         void Delete(ProcessPoint processPointModel);
     }

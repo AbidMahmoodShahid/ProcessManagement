@@ -11,9 +11,13 @@ namespace Process.Editor.Repo
     {
         Task<List<ProcessModel>> GetAll();
 
-        void AttachOrUpdate(ProcessModel processModel);
+        void Attach(ProcessModel processModel);
 
-        void AttachOrUpdateRange(ObservableCollection<ProcessModel> processModel);
+        void AttachRange(ObservableCollection<ProcessModel> processModel);
+
+        void Update(ProcessModel processModel);
+
+        void UpdateRange(ObservableCollection<ProcessModel> processModel);
 
         void Delete(ProcessModel processModel);
     }
