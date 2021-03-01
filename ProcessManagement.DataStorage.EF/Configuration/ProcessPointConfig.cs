@@ -20,7 +20,7 @@ namespace ProcessManagement.DataStorage.EF.Configuration
 
             modelBuilder.Entity<ProcessPoint>()
                 .HasOne<ProcessGroupModel>(pP => pP.ProcessGroupModel)
-                .WithMany(pG => pG.ItemCollection)
+                .WithMany(pG => pG.ProcessPoints)
                 .HasForeignKey(pP => pP.ProcessGroupModelId)
                 .OnDelete(DeleteBehavior.Cascade);
 

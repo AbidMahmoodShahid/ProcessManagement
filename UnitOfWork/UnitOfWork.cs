@@ -79,7 +79,6 @@ namespace DataAccess
 
         public async Task SaveChangesAsync()
         {
-            await Task.Delay(5000);
             _pMDataContext.SaveChanges();//TODO AM: _pMDataContext has async as well, see if it works as well
             //transaction.Result.Commit();
             _transaction.Commit();

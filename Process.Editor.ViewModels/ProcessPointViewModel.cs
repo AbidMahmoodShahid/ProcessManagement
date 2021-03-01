@@ -179,7 +179,9 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
+
+                //uow.ProcessGroupRepo.Update(SelectedProcessGroup);
                 await uow.SaveChangesAsync();
             }
         }
@@ -212,13 +214,14 @@ namespace Process.Editor.ViewModels
                     }
                 }
 
+                ProcessGroupModel processGroupModel = (ProcessGroupModel)SelectedProcessGroup;
                 List<ProcessPoint> updatedProcessPointList = SelectedProcessGroup.ItemCollection.ToList();
                 using(UnitOfWork uow = new UnitOfWork())
                 {
-                    // Method 1
+                    //// Method 1
                     //uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
 
-                    // Method 2
+                    //// Method 2
                     //uow.ProcessPointRepo.Delete(processPointToDelete);
                     //SelectedProcessGroup.ItemCollection.Remove(processPointToDelete);
 
@@ -229,9 +232,14 @@ namespace Process.Editor.ViewModels
                     //}
                     //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
 
-                    // Method 3
-                    uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+                    //// Method 3
+                    //uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+                    //uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
+
+                    // Method 4
                     uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
+                    uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+
                     await uow.SaveChangesAsync();
                 }
 

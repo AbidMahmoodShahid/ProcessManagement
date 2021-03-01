@@ -1,5 +1,6 @@
 ﻿using inotech.Core;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,8 +26,10 @@ namespace Process.Editor.Elements
             set { SetField(ref _sortingNumber, value); }
         }
 
-        //Collection Navigation Property(OneToMany)
         public ObservableCollection<ProcessPoint> ItemCollection { get; set; }
+
+        //Collection Navigation Property(OneToMany)
+        public ICollection<ProcessPoint> ProcessPoints { get; set; }
 
         //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
         // Reference Navigation Property(OneToMany)
