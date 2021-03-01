@@ -5,6 +5,7 @@ using Process.Editor.Services;
 using ProcessManagement.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 
 namespace Process.Editor.ViewModels
@@ -179,7 +180,7 @@ namespace Process.Editor.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessGroupRepo.Update(SelectedProcessGroup);
-                await uow.SaveChanges();
+                await uow.SaveChangesAsync();
             }
         }
 
@@ -199,6 +200,7 @@ namespace Process.Editor.ViewModels
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete the process point?", "Delete Processpoint", MessageBoxButton.YesNo);
             if(result == MessageBoxResult.Yes)
             {
+                ProcessPoint processPointToDelete = SelectedProcessPoint;
                 SelectedProcessGroup.ItemCollection.Remove(SelectedProcessPoint);
 
                 if(SelectedProcessGroup.ItemCollection.Count > 0)
@@ -210,12 +212,27 @@ namespace Process.Editor.ViewModels
                     }
                 }
 
-
+                List<ProcessPoint> updatedProcessPointList = SelectedProcessGroup.ItemCollection.ToList();
                 using(UnitOfWork uow = new UnitOfWork())
                 {
-                    uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection);
-                    uow.ProcessPointRepo.Delete(SelectedProcessPoint);
-                    await uow.SaveChanges();
+                    // Method 1
+                    //uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
+
+                    // Method 2
+                    //uow.ProcessPointRepo.Delete(processPointToDelete);
+                    //SelectedProcessGroup.ItemCollection.Remove(processPointToDelete);
+
+                    //for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
+                    //{
+                    //    SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
+                    //    i++;
+                    //}
+                    //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
+
+                    // Method 3
+                    uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+                    uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
+                    await uow.SaveChangesAsync();
                 }
 
             }

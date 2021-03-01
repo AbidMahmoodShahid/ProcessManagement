@@ -208,6 +208,10 @@
     <Compile Include="Migrations\20210225123242_SimulationPointId.designer.cs">
       <DependentUpon>20210225123242_SimulationPointId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210301082508_CascadeDeleteList.cs" />
+    <Compile Include="Migrations\20210301082508_CascadeDeleteList.designer.cs">
+      <DependentUpon>20210301082508_CascadeDeleteList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

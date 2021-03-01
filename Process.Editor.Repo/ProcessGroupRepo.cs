@@ -25,12 +25,12 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessGroup.Include(pP => pP.ItemCollection).ToList();
         }
 
-        public void Add(ProcessGroupModel processGroupModel)
+        public void Attach(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Attach(processGroupModel);
         }
 
-        public void AddRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        public void AttachRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
             _pMDataContext.AttachRange(processGroupList);
         }

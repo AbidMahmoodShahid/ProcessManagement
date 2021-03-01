@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using DataAccess;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Process.Editor.ViewModels
 {
@@ -44,10 +45,15 @@ namespace Process.Editor.ViewModels
 
         private async void LoadAll()
         {
+            List<ProcessModel> processList;
             using(UnitOfWork uow = new UnitOfWork())
             {
-                ItemCollection = new ObservableCollection<ProcessModel>(await uow.ProcessRepo.GetAll());
+                processList = await uow.ProcessRepo.GetAll();
+                //ItemCollection = new ObservableCollection<ProcessModel>((await uow.ProcessRepo.GetAll()).ToList());
             }
+            List<ProcessModel> processListCopy = processList.ToList();
+            processList = null;
+            ItemCollection = new ObservableCollection<ProcessModel>(processListCopy);
         }
 
         private GetterService _getterService;

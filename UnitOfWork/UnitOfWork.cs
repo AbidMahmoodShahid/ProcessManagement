@@ -77,10 +77,10 @@ namespace DataAccess
 
         #endregion
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            await Task.Delay(10000);
-            _pMDataContext.SaveChanges();
+            await Task.Delay(5000);
+            _pMDataContext.SaveChanges();//TODO AM: _pMDataContext has async as well, see if it works as well
             //transaction.Result.Commit();
             _transaction.Commit();
         }

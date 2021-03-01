@@ -11,9 +11,9 @@ namespace Process.Editor.Repo
     {
         Task<List<ProcessGroupModel>> GetAll();
 
-        void Add(ProcessGroupModel processGroupModel);
+        void Attach(ProcessGroupModel processGroupModel);
 
-        void AddRange(ObservableCollection<ProcessGroupModel> processGroupModel);
+        void AttachRange(ObservableCollection<ProcessGroupModel> processGroupModel);
 
         void Update(ProcessGroupModel processGroupModel);
 

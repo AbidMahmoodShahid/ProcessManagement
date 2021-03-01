@@ -29,7 +29,7 @@ namespace Process.Editor.Repo
             _pMDataContext.ProcessPoint.Attach(processPointModel);
         }
 
-        public void AttachRange(ObservableCollection<ProcessPoint> processPointList)
+        public void AttachRange(List<ProcessPoint> processPointList)
         {
             _pMDataContext.ProcessPoint.AttachRange(processPointList);
         }
@@ -39,7 +39,7 @@ namespace Process.Editor.Repo
             _pMDataContext.ProcessPoint.Update(processPointModel);
         }
 
-        public void UpdateRange(ObservableCollection<ProcessPoint> processPointList)
+        public void UpdateRange(List<ProcessPoint> processPointList)
         {
             _pMDataContext.ProcessPoint.UpdateRange(processPointList);
         }

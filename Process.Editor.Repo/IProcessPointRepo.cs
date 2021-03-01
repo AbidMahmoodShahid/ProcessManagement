@@ -13,11 +13,11 @@ namespace Process.Editor.Repo
 
         void Attach(ProcessPoint processPointModel);
 
-        void AttachRange(ObservableCollection<ProcessPoint> processPointList);
+        void AttachRange(List<ProcessPoint> processPointList);
 
         void Update(ProcessPoint processPointModel);
 
-        void UpdateRange(ObservableCollection<ProcessPoint> processPointList);
+        void UpdateRange(List<ProcessPoint> processPointList);
 
         void Delete(ProcessPoint processPointModel);
     }

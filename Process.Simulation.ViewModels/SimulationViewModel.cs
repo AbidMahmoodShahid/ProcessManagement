@@ -157,7 +157,7 @@ namespace Process.Simulation.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.SimulationPointRepo.AttachRange(ProcessPointSimulationList);
-                uow.SaveChanges();
+                uow.SaveChangesAsync();
             }
 
         }
@@ -246,7 +246,7 @@ namespace Process.Simulation.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.SimulationPointRepo.UpdateAll(ProcessPointSimulationList);
-                uow.SaveChanges();
+                uow.SaveChangesAsync();
             }
         }
 

@@ -180,7 +180,7 @@ namespace Process.Editor.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessRepo.Update(SelectedProcess);
-                await uow.SaveChanges();
+                await uow.SaveChangesAsync();
             }
         }
 
@@ -203,7 +203,7 @@ namespace Process.Editor.ViewModels
                 return;
 
             //TODO AM: Reasearch Bug
-            ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
+            ProcessGroupModel processGroupModelToDelete = SelectedProcessGroup;
 
             SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
             if(SelectedProcess.ItemCollection.Count > 0)
@@ -217,8 +217,8 @@ namespace Process.Editor.ViewModels
             using(UnitOfWork uow = new UnitOfWork())
             {
                 uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
-                uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                await uow.SaveChanges();
+                uow.ProcessGroupRepo.Delete(processGroupModelToDelete);
+                await uow.SaveChangesAsync();
             }
 
         }
