@@ -207,19 +207,20 @@ namespace Process.Editor.ViewModels
             // if the item is not untracked, the item is added back to the viewmodel-list on untracking from repository
 
             ProcessGroupModel selectedProcessGroupModel = SelectedProcessGroup;
+
+            //uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
+            SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
+
+            if(SelectedProcess.ItemCollection.Count > 0)
+            {
+                for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
+                {
+                    SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
+                }
+            }
+
             using(UnitOfWork uow = new UnitOfWork())
             {
-                //uow.ProcessGroupRepo.Delete(selectedProcessGroupModel);
-                SelectedProcess.ItemCollection.Remove(SelectedProcessGroup);
-
-                if(SelectedProcess.ItemCollection.Count > 0)
-                {
-                    for(int i = 0; i < SelectedProcess.ItemCollection.Count; i++)
-                    {
-                        SelectedProcess.ItemCollection[i].SortingNumber = i + 1;
-                    }
-                }
-
                 //uow.ProcessRepo.AttachOrUpdate(SelectedProcess);
                 //uow.ProcessGroupRepo.AddOrUpdateRange(SelectedProcess.ItemCollection);
                 uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
