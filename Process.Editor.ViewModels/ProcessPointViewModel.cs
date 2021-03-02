@@ -228,7 +228,7 @@ namespace Process.Editor.ViewModels
                     // Method 2
                     uow.ProcessPointRepo.Delete(processPointToDelete);
 
-                    SelectedProcessGroup.ItemCollection.Remove(processPointToDelete);
+                    SelectedProcessGroup.ItemCollection.Remove(processPointToDelete); // TODO AM: check all three options in doku 1) doesnt load IC 2) Loads and deletes immediately 3) what we have now
                     for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
                     {
                         SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
