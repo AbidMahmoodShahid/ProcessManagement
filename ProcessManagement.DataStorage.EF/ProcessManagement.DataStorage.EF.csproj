@@ -216,6 +216,10 @@
     <Compile Include="Migrations\20210301094957_Added ProcessPoints Navigation Property.designer.cs">
       <DependentUpon>20210301094957_Added ProcessPoints Navigation Property.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210302070204_revertedToItemCollection.cs" />
+    <Compile Include="Migrations\20210302070204_revertedToItemCollection.designer.cs">
+      <DependentUpon>20210302070204_revertedToItemCollection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

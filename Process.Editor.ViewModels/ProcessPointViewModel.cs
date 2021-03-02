@@ -179,9 +179,9 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
+                //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
 
-                //uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
                 await uow.SaveChangesAsync();
             }
         }
@@ -214,10 +214,14 @@ namespace Process.Editor.ViewModels
                     }
                 }
 
-                ProcessGroupModel processGroupModel = (ProcessGroupModel)SelectedProcessGroup;
                 List<ProcessPoint> updatedProcessPointList = SelectedProcessGroup.ItemCollection.ToList();
                 using(UnitOfWork uow = new UnitOfWork())
                 {
+                    //// Method 0
+                    //uow.ProcessPointRepo.Delete(processPointToDelete);
+                    //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection);
+
+
                     //// Method 1
                     //uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
 

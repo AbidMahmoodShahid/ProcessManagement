@@ -20,7 +20,7 @@ namespace ProcessManagement.DataStorage.EF.Configuration
 
             modelBuilder.Entity<ProcessPoint>()
                 .HasOne<ProcessGroupModel>(pP => pP.ProcessGroupModel)
-                .WithMany(pG => pG.ProcessPoints)
+                .WithMany(pG => pG.ItemCollection) //--> is read from database when processpoint is deleted, updated on save.
                 .HasForeignKey(pP => pP.ProcessGroupModelId)
                 .OnDelete(DeleteBehavior.Cascade);
 

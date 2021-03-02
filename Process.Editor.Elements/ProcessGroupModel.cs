@@ -26,10 +26,10 @@ namespace Process.Editor.Elements
             set { SetField(ref _sortingNumber, value); }
         }
 
-        public ObservableCollection<ProcessPoint> ItemCollection { get; set; }
 
         //Collection Navigation Property(OneToMany)
-        public ICollection<ProcessPoint> ProcessPoints { get; set; }
+        public ObservableCollection<ProcessPoint> ItemCollection { get; set; }
+        //public ICollection<ProcessPoint> ProcessPoints { get; set; }
 
         //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
         // Reference Navigation Property(OneToMany)

@@ -45,15 +45,10 @@ namespace Process.Editor.ViewModels
 
         private async void LoadAll()
         {
-            List<ProcessModel> processList;
             using(UnitOfWork uow = new UnitOfWork())
             {
-                processList = await uow.ProcessRepo.GetAll();
-                //ItemCollection = new ObservableCollection<ProcessModel>((await uow.ProcessRepo.GetAll()).ToList());
+                ItemCollection = new ObservableCollection<ProcessModel>((await uow.ProcessRepo.GetAll()).ToList());
             }
-            List<ProcessModel> processListCopy = processList.ToList();
-            processList = null;
-            ItemCollection = new ObservableCollection<ProcessModel>(processListCopy);
         }
 
         private GetterService _getterService;
