@@ -194,7 +194,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.Attach((ProcessModel)newProcess);
+                await uow.ProcessRepo.Attach((ProcessModel)newProcess);
                 await uow.SaveChangesAsync();
             }
         }
@@ -219,7 +219,7 @@ namespace Process.Editor.ViewModels
             // removing selected process from Database
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.Delete(SelectedProcess);
+                await uow.ProcessRepo.Delete(SelectedProcess);
                 await uow.SaveChangesAsync();
             }
 

@@ -24,27 +24,27 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessPoint.ToList();
         }
 
-        public void Attach(ProcessPoint processPointModel)
+        public async Task Attach(ProcessPoint processPointModel)
         {
             _pMDataContext.ProcessPoint.Attach(processPointModel);
         }
 
-        public void AttachRange(List<ProcessPoint> processPointList)
+        public async Task AttachRange(List<ProcessPoint> processPointList)
         {
             _pMDataContext.ProcessPoint.AttachRange(processPointList);
         }
 
-        public void Update(ProcessPoint processPointModel)
+        public async Task Update(ProcessPoint processPointModel)
         {
             _pMDataContext.ProcessPoint.Update(processPointModel);
         }
 
-        public void UpdateRange(List<ProcessPoint> processPointList)
+        public async Task UpdateRange(List<ProcessPoint> processPointList)
         {
             _pMDataContext.ProcessPoint.UpdateRange(processPointList);
         }
 
-        public void Delete(ProcessPoint processPointModel)
+        public async Task Delete(ProcessPoint processPointModel)
         {
             _pMDataContext.ProcessPoint.Remove(processPointModel);
         }

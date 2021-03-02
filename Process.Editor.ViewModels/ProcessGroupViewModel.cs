@@ -179,7 +179,7 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessRepo.Update(SelectedProcess);
+                await uow.ProcessRepo.Update(SelectedProcess);
                 await uow.SaveChangesAsync();
             }
         }
@@ -216,8 +216,8 @@ namespace Process.Editor.ViewModels
 
             using(UnitOfWork uow = new UnitOfWork())
             {
-                uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
-                uow.ProcessGroupRepo.Delete(processGroupModelToDelete);
+                await uow.ProcessGroupRepo.UpdateRange(SelectedProcess.ItemCollection);
+                await uow.ProcessGroupRepo.Delete(processGroupModelToDelete);
                 await uow.SaveChangesAsync();
             }
 

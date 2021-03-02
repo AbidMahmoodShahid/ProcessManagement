@@ -181,7 +181,7 @@ namespace Process.Editor.ViewModels
             {
                 //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
 
-                uow.ProcessGroupRepo.Update(SelectedProcessGroup);
+                await uow.ProcessGroupRepo.Update(SelectedProcessGroup);
                 await uow.SaveChangesAsync();
             }
         }
@@ -226,7 +226,7 @@ namespace Process.Editor.ViewModels
                     //uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
 
                     // Method 2
-                    uow.ProcessPointRepo.Delete(processPointToDelete);
+                    await uow.ProcessPointRepo.Delete(processPointToDelete);
 
                     SelectedProcessGroup.ItemCollection.Remove(processPointToDelete); // TODO AM: check all three options in doku 1) doesnt load IC 2) Loads and deletes immediately 3) what we have now
                     for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
@@ -234,7 +234,7 @@ namespace Process.Editor.ViewModels
                         SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
                         i++;
                     }
-                    uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
+                    await uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
 
                     //// Method 3
                     //uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);

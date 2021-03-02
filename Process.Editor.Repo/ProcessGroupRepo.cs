@@ -25,27 +25,27 @@ namespace Process.Editor.Repo
             return _pMDataContext.ProcessGroup.Include(pP => pP.ItemCollection).ToList();
         }
 
-        public void Attach(ProcessGroupModel processGroupModel)
+        public async Task Attach(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Attach(processGroupModel);
         }
 
-        public void AttachRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        public async Task AttachRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
             _pMDataContext.AttachRange(processGroupList);
         }
 
-        public void Update(ProcessGroupModel processGroupModel)
+        public async Task Update(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Update(processGroupModel);
         }
 
-        public void UpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
+        public async Task UpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
             _pMDataContext.UpdateRange(processGroupList);
         }
 
-        public void Delete(ProcessGroupModel processGroupModel)
+        public async Task Delete(ProcessGroupModel processGroupModel)
         {
             _pMDataContext.ProcessGroup.Remove(processGroupModel);
         }

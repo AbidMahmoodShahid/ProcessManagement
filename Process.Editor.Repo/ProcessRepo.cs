@@ -24,27 +24,27 @@ namespace Process.Editor.Repo
             return _pMDataContext.Process.Include(pM => pM.ItemCollection).ThenInclude(pG => pG.ItemCollection).ToList();
         }
 
-        public void Attach(ProcessModel processModel)
+        public async Task Attach(ProcessModel processModel)
         {
             _pMDataContext.Process.Attach(processModel);
         }
 
-        public void AttachRange(ObservableCollection<ProcessModel> processModelList)
+        public async Task AttachRange(ObservableCollection<ProcessModel> processModelList)
         {
             _pMDataContext.Process.AttachRange(processModelList);
         }
 
-        public void Update(ProcessModel processModel)
+        public async Task Update(ProcessModel processModel)
         {
             _pMDataContext.Process.Update(processModel);
         }
 
-        public void UpdateRange(ObservableCollection<ProcessModel> processModelList)
+        public async Task UpdateRange(ObservableCollection<ProcessModel> processModelList)
         {
             _pMDataContext.Process.UpdateRange(processModelList);
         }
 
-        public void Delete(ProcessModel processModel)
+        public async Task Delete(ProcessModel processModel)
         {
             _pMDataContext.Process.Remove(processModel);
         }
