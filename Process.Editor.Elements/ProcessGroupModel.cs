@@ -31,6 +31,12 @@ namespace Process.Editor.Elements
         public ObservableCollection<ProcessPoint> ItemCollection { get; set; }
         //public ICollection<ProcessPoint> ProcessPoints { get; set; }
 
+
+
+
+
+
+
         //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
         // Reference Navigation Property(OneToMany)
         public ProcessModel ProcessModel { get; set; }

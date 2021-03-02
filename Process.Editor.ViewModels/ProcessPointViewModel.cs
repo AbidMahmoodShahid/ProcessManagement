@@ -203,46 +203,46 @@ namespace Process.Editor.ViewModels
             if(result == MessageBoxResult.Yes)
             {
                 ProcessPoint processPointToDelete = SelectedProcessPoint;
-                //SelectedProcessGroup.ItemCollection.Remove(SelectedProcessPoint);
 
-                //if(SelectedProcessGroup.ItemCollection.Count > 0)
-                //{
-                //    for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
-                //    {
-                //        SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
-                //        i++;
-                //    }
-                //}
-
-                List<ProcessPoint> updatedProcessPointList = SelectedProcessGroup.ItemCollection.ToList();
-                using(UnitOfWork uow = new UnitOfWork())
+                SelectedProcessGroup.ItemCollection.Remove(SelectedProcessPoint);
+                if(SelectedProcessGroup.ItemCollection.Count > 0)
                 {
-                    //// Method 0
-                    //uow.ProcessPointRepo.Delete(processPointToDelete);
-                    //uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection);
-
-
-                    //// Method 1
-                    //uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
-
-                    // Method 2
-                    await uow.ProcessPointRepo.Delete(processPointToDelete);
-
-                    SelectedProcessGroup.ItemCollection.Remove(processPointToDelete); // TODO AM: check all three options in doku 1) doesnt load IC 2) Loads and deletes immediately 3) what we have now
                     for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
                     {
                         SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
                         i++;
                     }
-                    await uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
+                }
+
+                List<ProcessPoint> updatedProcessPointList = SelectedProcessGroup.ItemCollection.ToList();
+                using(UnitOfWork uow = new UnitOfWork())
+                {
+                    //// Method 0
+                    //await uow.ProcessPointRepo.Delete(processPointToDelete);
+                    //await uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection);
+
+
+                    //// Method 1
+                    //await uow.ProcessGroupRepo.Update(SelectedProcessGroup); Does not delete ProcessPoint from processPointTable (nor the foreignkey reference)
+
+                    //// Method 2
+                    //await uow.ProcessPointRepo.Delete(processPointToDelete);
+
+                    //SelectedProcessGroup.ItemCollection.Remove(processPointToDelete); // TODO AM: check all three options in doku 1) doesnt load IC 2) Loads and deletes immediately 3) what we have now
+                    //for(int i = 0; i < SelectedProcessGroup.ItemCollection.Count; i++)
+                    //{
+                    //    SelectedProcessGroup.ItemCollection[i].SortingNumber = i + 1;
+                    //    i++;
+                    //}
+                    //await uow.ProcessPointRepo.UpdateRange(SelectedProcessGroup.ItemCollection.ToList());
 
                     //// Method 3
-                    //uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
-                    //uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
+                    //await uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+                    //await uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
 
-                    //// Method 4
-                    //uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
-                    //uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
+                    // Method 4
+                    await uow.ProcessPointRepo.Delete(processPointToDelete); //TODO AM: if item doesnt exist in DB, exception will be thrown. (TryCatch?)
+                    await uow.ProcessPointRepo.UpdateRange(updatedProcessPointList);
 
                     await uow.SaveChangesAsync();
                 }

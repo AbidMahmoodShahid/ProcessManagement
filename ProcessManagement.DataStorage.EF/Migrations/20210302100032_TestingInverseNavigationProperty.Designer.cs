@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessManagement.DataStorage.EF;
 
 namespace ProcessManagement.DataStorage.EF.Migrations
 {
     [DbContext(typeof(PMDataContext))]
-    partial class PMDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210302100032_TestingInverseNavigationProperty")]
+    partial class TestingInverseNavigationProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +175,7 @@ namespace ProcessManagement.DataStorage.EF.Migrations
 
             modelBuilder.Entity("Process.Editor.Elements.ProcessPoint", b =>
                 {
-                    b.HasOne("Process.Editor.Elements.ProcessGroupModel", null)
+                    b.HasOne("Process.Editor.Elements.ProcessGroupModel", "ProcessGroupModel")
                         .WithMany("ItemCollection")
                         .HasForeignKey("ProcessGroupModelProcessGroupId");
                 });

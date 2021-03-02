@@ -25,10 +25,10 @@ namespace Process.Editor.Elements
 
 
         //(Kann mit Shadow Property auch gemacht werden) mit Fluent API
-        // Reference Navigation Property(OneToMany)
-        public ProcessGroupModel ProcessGroupModel { get; set; }
-        // Foriegn Key Property
-        public int ProcessGroupModelId { get; set; }
+        //// Reference Navigation Property(OneToMany)
+        //public ProcessGroupModel ProcessGroupModel { get; set; }
+        //// Foriegn Key Property
+        //public int ProcessGroupModelId { get; set; } // --> without foriegnKey: Inverse Navigation Property
 
         #endregion
 

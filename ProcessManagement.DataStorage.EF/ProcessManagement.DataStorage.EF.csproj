@@ -224,6 +224,14 @@
     <Compile Include="Migrations\20210302075723_removedDeleteCasacde.designer.cs">
       <DependentUpon>20210302075723_removedDeleteCasacde.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210302100032_TestingInverseNavigationProperty.cs" />
+    <Compile Include="Migrations\20210302100032_TestingInverseNavigationProperty.designer.cs">
+      <DependentUpon>20210302100032_TestingInverseNavigationProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20210302101006_TestingNoNavigationProperty.cs" />
+    <Compile Include="Migrations\20210302101006_TestingNoNavigationProperty.designer.cs">
+      <DependentUpon>20210302101006_TestingNoNavigationProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
