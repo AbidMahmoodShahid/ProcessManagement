@@ -12,19 +12,6 @@ namespace ProcessManagement.DataStorage.EF.Configuration
     {
         public static void ApplyProcessConfig(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProcessGroupModel>()
-                .HasOne<ProcessModel>(pG => pG.ProcessModel)
-                .WithMany(p => p.ItemCollection)
-                .HasForeignKey(pG => pG.ProcessModelId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ProcessPoint>()
-                .HasOne<ProcessGroupModel>(pP => pP.ProcessGroupModel)
-                .WithMany(pG => pG.ItemCollection) //--> is read from database when processpoint is deleted, updated on save.
-                .HasForeignKey(pP => pP.ProcessGroupModelId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
             modelBuilder.Entity<ProcessPoint>().ToTable("ProcessPoint").HasDiscriminator<string>("ProcessPointType")
                 .HasValue<ProcessPointA>("ProcessPointA")
                 .HasValue<ProcessPointB>("ProcessPointB")

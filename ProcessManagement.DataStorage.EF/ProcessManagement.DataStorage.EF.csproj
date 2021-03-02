@@ -220,6 +220,10 @@
     <Compile Include="Migrations\20210302070204_revertedToItemCollection.designer.cs">
       <DependentUpon>20210302070204_revertedToItemCollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210302075723_removedDeleteCasacde.cs" />
+    <Compile Include="Migrations\20210302075723_removedDeleteCasacde.designer.cs">
+      <DependentUpon>20210302075723_removedDeleteCasacde.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
