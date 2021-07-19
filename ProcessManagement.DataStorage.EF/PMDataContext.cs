@@ -2,14 +2,6 @@
 using Process.Editor.Elements;
 using Process.Simulation.Elements;
 using ProcessManagement.DataStorage.EF.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProcessManagement.DataStorage.EF
 {
@@ -18,6 +10,8 @@ namespace ProcessManagement.DataStorage.EF
         public DbSet<ProcessModel> Process { get; set; }
         public DbSet<ProcessGroupModel> ProcessGroup { get; set; }
         public DbSet<ProcessPoint> ProcessPoint { get; set; }
+        public DbSet<TableA> TableA { get; set; }
+        public DbSet<TableB> TableB { get; set; }
 
         public DbSet<SimulationPointModel> SimulationPoint { get; set; }
 
@@ -34,6 +28,8 @@ namespace ProcessManagement.DataStorage.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ProcessPointConfig.ApplyProcessConfig(modelBuilder);
+
+            modelBuilder.Entity<TableAB>().HasKey(ab => new { ab.TableAId, ab.TableBId });
         }
 
     }

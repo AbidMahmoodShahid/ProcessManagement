@@ -32,7 +32,7 @@ namespace Process.Editor.Repo
 
         public async Task AttachRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
-            _pMDataContext.AttachRange(processGroupList);
+            _pMDataContext.ProcessGroup.AttachRange(processGroupList);
         }
 
         public async Task Update(ProcessGroupModel processGroupModel)
@@ -42,7 +42,7 @@ namespace Process.Editor.Repo
 
         public async Task UpdateRange(ObservableCollection<ProcessGroupModel> processGroupList)
         {
-            _pMDataContext.UpdateRange(processGroupList);
+            _pMDataContext.ProcessGroup.UpdateRange(processGroupList);
         }
 
         public async Task Delete(ProcessGroupModel processGroupModel)

@@ -232,6 +232,10 @@
     <Compile Include="Migrations\20210302101006_TestingNoNavigationProperty.designer.cs">
       <DependentUpon>20210302101006_TestingNoNavigationProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20210330135559_TestingManyToMany.cs" />
+    <Compile Include="Migrations\20210330135559_TestingManyToMany.designer.cs">
+      <DependentUpon>20210330135559_TestingManyToMany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\PMDataContextModelSnapshot.cs" />
     <Compile Include="PMDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
